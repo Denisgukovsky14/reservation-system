@@ -1,4 +1,4 @@
-package com.sarcofuckusLesson.reservation_system;
+package com.sarcofuckusLesson.designhub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,10 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 * созданную нами архитектуру приложения */
 
 @SpringBootTest
-class ReservationSystemApplicationTests {
+class DesignHubApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
-
 }
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дизайн-Хаб — тест связи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #5F8BFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4A7DFF;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            display: none;
+        }
+        .result.show {
+            display: block;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🧪 Тест связи: HTML → Java Spring</h2>
+
+    <label for="message">Текстовое поле:</label>
+    <textarea id="message" rows="3" placeholder="Введи что-нибудь..."></textarea>
+
+    <button onclick="sendData()">Отправить на сервер</button>
+
+    <div id="result" class="result">
+        <strong>✅ Ответ от сервера:</strong><br>
+        <span id="serverResponse"></span>
+    </div>
+</div>
+
+<script>
+    async function sendData() {
+        const message = document.getElementById('message').value;
+
+        if (!message.trim()) {
+            alert('Пожалуйста, введите текст');
+            return;
+        }
+
+        const resultDiv = document.getElementById('result');
+        const responseSpan = document.getElementById('serverResponse');
+
+        // Показываем состояние загрузки
+        resultDiv.classList.add('show');
+        responseSpan.textContent = 'Отправка...';
+
+        try {
+            const response = await fetch('/reservation/api/test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: message })
+            });
+
+            const data = await response.json();
+            responseSpan.textContent = data.message || 'Успешно отправлено!';
+
+        } catch (error) {
+            responseSpan.textContent = 'Ошибка: ' + error.message;
+        }
+    }
+</script>
+</body>
+</html>

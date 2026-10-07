@@ -1,4 +1,4 @@
-package com.sarcofuckusLesson.reservation_system;
+package com.sarcofuckusLesson.designhub;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 самый главный, корневой в нашем приложении*/
 
 @SpringBootApplication
-public class ReservationSystemApplication {
+public class DesignHubApplication {
 
     /* Собственно, здесь мы и запускаем наше исполняющее приложение */
 	public static void main(String[] args) {
-		SpringApplication.run(ReservationSystemApplication.class, args);
+		SpringApplication.run(DesignHubApplication.class, args);
 	}
 
 }
