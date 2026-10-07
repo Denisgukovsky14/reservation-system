@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- HEADER --- */
+header {
+    background: var(--bg-sidebar);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 18px;
+    height: 18px;
+    background: var(--text-main);
+    border-radius: 4px;
+}
+
+nav {
+    display: flex;
+    gap: 24px;
+}
+
+nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+nav a.active {
+    color: var(--text-main);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box input {
+    background: #374151;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px 8px 35px;
+    color: white;
+    width: 250px;
+}
+
+/* --- MAIN LAYOUT --- */
+.layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    flex: 1;
+}
+
+/* --- SIDEBAR FILTERS --- */
+aside {
+    background: var(--bg-body);
+    padding: 40px 30px;
+    border-right: 1px solid var(--border);
+}
+
+.filter-section {
+    margin-bottom: 30px;
+}
+
+.filter-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.filter-group-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.checkbox-item input {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-item input:checked {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+.checkbox-item input:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    left: 3px;
+    top: -1px;
+}
+
+/* --- CONTENT AREA --- */
+main {
+    padding: 40px;
+}
+
+.view-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.view-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.view-btn.active {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+/* --- VIEW TOGGLE LOGIC --- */
+#cards-view.hidden,
+#table-view.hidden {
+    display: none;
+}
+
+/* Карточка подрядчика */
+.contractor-card {
+    background: var(--bg-sidebar);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: 0.3s;
+}
+
+.contractor-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-blue);
+}
+
+.card-info {
+    padding: 32px;
+}
+
+.card-meta {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.card-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+.card-image {
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+}
+
+/* Табличный вид */
+.contractor-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-sidebar);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.contractor-table th {
+    text-align: left;
+    padding: 16px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--color-surface-light);
+}
+
+.contractor-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.rating-bar {
+    height: 6px;
+    background: var(--color-surface-light);
+    border-radius: 3px;
+    width: 100px;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.rating-fill {
+    height: 100%;
+    background: var(--accent-blue);
+    border-radius: 3px;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.page-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.page-link.active {
+    background: var(--btn-primary-bg);
+    color: white;
+    border-color: var(--btn-primary-bg);
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    aside {
+        display: none;
+    }
+
+    .contractor-card {
+        grid-template-columns: 1fr;
+    }
+
+    .contractor-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

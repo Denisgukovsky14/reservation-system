@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>София Картер — Портфолио | DesignHub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg-body: #0b111b;
+            --bg-card: #161c28;
+            --accent-blue: #3b82f6;
+            --text-main: #ffffff;
+            --text-dim: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(11, 17, 27, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .header-left, .header-right { display: flex; align-items: center; gap: 30px; }
+        .logo { font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: white; }
+        
+        .search-bar { background: #1f2937; border-radius: 8px; padding: 8px 15px; width: 250px; border: 1px solid var(--border); }
+        .search-bar input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 0.85rem; }
+
+        /* --- PROFILE HEADER --- */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        
+        .profile-hero { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; }
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-blue); }
+        .profile-meta h1 { font-size: 2rem; margin-bottom: 5px; }
+        .profile-meta p { color: var(--text-dim); font-size: 0.95rem; }
+        .btn-follow { 
+            margin-left: auto; background: #2d3748; color: white; border: none; 
+            padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn-follow:hover { background: var(--accent-blue); }
+
+        /* --- TABS --- */
+        .tabs { border-bottom: 1px solid var(--border); display: flex; gap: 30px; margin-bottom: 40px; }
+        .tab { padding: 10px 0; color: var(--text-dim); cursor: pointer; position: relative; font-weight: 500; }
+        .tab.active { color: var(--accent-blue); }
+        .tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--accent-blue); }
+
+        /* --- SECTIONS --- */
+        section { margin-bottom: 60px; }
+        h2 { font-size: 1.5rem; margin-bottom: 20px; }
+        .about-text { color: var(--text-dim); max-width: 900px; margin-bottom: 30px; }
+
+        /* Portfolio Grid */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .work-card { border-radius: 12px; overflow: hidden; background: var(--bg-card); transition: 0.3s; }
+        .work-card:hover { transform: translateY(-5px); }
+        .work-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+        /* Services */
+        .services-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+        .service-item { padding: 15px; background: var(--color-surface-light); border-radius: 8px; border-left: 4px solid var(--accent-blue); }
+
+        /* Reviews */
+        .review-card { margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
+        .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .review-avatar { width: 40px; height: 40px; border-radius: 50%; }
+        .stars { color: #fbbf24; margin-bottom: 10px; }
+        .review-text { color: var(--text-dim); font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .profile-hero { flex-direction: column; text-align: center; }
+            .btn-follow { margin: 20px 0 0 0; width: 100%; }
+            header { padding: 15px 20px; }
+            .search-bar, .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">DesignHub</div>
+            <nav class="nav-links">
+                <a href="#">Главная</a>
+                <a href="#">Проекты</a>
+                <a href="#">Поиск специалистов</a>
+                <a href="#">Ресурсы</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-bar"><input type="text" placeholder="Поиск..."></div>
+            <span>🔔</span>
+            <img src="https://i.pravatar.cc/100?img=26" style="width: 32px; border-radius: 50%;" alt="User">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="profile-hero">
+            <img src="https://i.pravatar.cc/100?img=32" class="profile-avatar" alt="София Картер">
+            <div class="profile-meta">
+                <h1>София Картер</h1>
+                <p>Дизайнер интерьеров</p>
+                <p>Базируется в Нью-Йорке, США</p>
+            </div>
+            <button class="btn-follow">Подписаться</button>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">Обзор</div>
+            <div class="tab">Проекты</div>
+            <div class="tab">Отзывы</div>
+        </div>
+
+        <section>
+            <h2>О себе</h2>
+            <p class="about-text">
+                София Картер — титулованный дизайнер интерьеров из Нью-Йорка. Имея более 10 лет опыта, она специализируется на создании элегантных и функциональных пространств для жилых и коммерческих клиентов. Её работы публиковались в многочисленных профильных изданиях, и она известна своим вниманием к деталям и стремлением к полному удовлетворению потребностей клиентов.
+            </p>
+        </section>
+
+        <section>
+            <h2>Портфолио</h2>
+            <div class="portfolio-grid">
+                <div class="work-card"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500" alt="Проект 1"></div>
+                <div class="work-card"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" alt="Проект 2"></div>
+                <div class="work-card"><img src="https://images.unsplash.com/photo-1505693357370-58c35bd36121?w=500" alt="Проект 3"></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Услуги</h2>
+            <div class="services-list">
+                <div class="service-item">Дизайн интерьера</div>
+                <div class="service-item">Планирование пространства</div>
+                <div class="service-item">Подбор мебели</div>
+                <div class="service-item">Управление проектами</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Отзывы</h2>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://i.pravatar.cc/100?img=12" class="review-avatar" alt="Итан">
+                    <div>
+                        <strong>Итан Беннетт</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-dim);">2 месяца назад</div>
+                    </div>
+                </div>
+                <div class="stars">★★★★★</div>
+                <p class="review-text">София превратила мою гостиную в потрясающее и функциональное пространство, которое идеально отражает мой стиль. Её внимание к деталям и профессионализм были исключительными на протяжении всего процесса.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://i.pravatar.cc/100?img=44" class="review-avatar" alt="Оливия">
+                    <div>
+                        <strong>Оливия Хейс</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-dim);">6 месяцев назад</div>
+                    </div>
+                </div>
+                <div class="stars">★★★★☆</div>
+                <p class="review-text">София предложила отличные дизайнерские идеи и помогла мне выбрать идеальную мебель для моей новой квартиры. Я очень довольна результатом!</p>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

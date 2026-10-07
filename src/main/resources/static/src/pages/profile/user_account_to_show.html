@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignHub — Публичный профиль</title>
+    <script>(function(){function a(){if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}a();window.addEventListener('pageshow',function(e){if(e.persisted)a();});})();</script>
+    <link href="/src/styles/main.css" rel="stylesheet" type="text/css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-page);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+        }
+
+        .public-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 32px;
+        }
+
+        .profile-hero {
+            background: var(--bg-card);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            padding: 32px 40px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-avatar {
+            flex-shrink: 0;
+        }
+
+        .hero-avatar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-blue);
+            background: #fff;
+        }
+
+        .hero-info {
+            flex: 1;
+        }
+
+        .hero-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(var(--accent-rgb), 0.15);
+            color: var(--accent-blue);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .rating-static {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-surface-light);
+            padding: 6px 14px;
+            border-radius: 40px;
+        }
+
+        .stars-readonly {
+            display: flex;
+            gap: 4px;
+        }
+
+        .star-filled {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        .star-empty {
+            color: #4b5563;
+            font-size: 1.2rem;
+        }
+
+        .rating-value {
+            font-weight: 600;
+        }
+
+        .reviews-count {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .btn-contact {
+            background: var(--accent-blue);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-contact:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 5px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 20px;
+            height: max-content;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            border-left: 3px solid var(--accent-blue);
+            padding-left: 14px;
+        }
+
+        .services-scroll {
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .services-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .services-scroll::-webkit-scrollbar-track {
+            background: var(--color-surface-light);
+            border-radius: 10px;
+        }
+
+        .services-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+        }
+
+        .service-group {
+            margin-bottom: 16px;
+        }
+
+        .service-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-group h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--accent-blue);
+        }
+
+        .service-group ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .service-group ul li {
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            padding: 8px 12px;
+            background: var(--color-surface-light);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .info-label {
+            width: 100px;
+            flex-shrink: 0;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        .info-value {
+            flex: 1;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .full-width-card {
+            grid-column: 1 / -1;
+        }
+
+        .about-text {
+            line-height: 1.6;
+            color: var(--text-dim);
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .about-text::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .about-text::-webkit-scrollbar-track {
+            background: var(--color-surface-light);
+            border-radius: 10px;
+        }
+
+        .about-text::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+        }
+
+        /* Блок отзывов */
+        .reviews-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .reviews-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .review-item {
+            background: var(--color-surface-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin: 5px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .review-rating {
+            color: #fbbf24;
+        }
+
+        .review-title {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .review-comment {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .review-date {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .reviews-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .reviews-summary {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(var(--accent-rgb), 0.1);
+        }
+
+        /* Модальное окно */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .modal-container {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            border: 1px solid var(--border);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .reviews-list-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 10px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
+        }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(239,68,68,0.1);
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
+        }
+
+        .empty-value {
+            color: var(--text-dim);
+            font-style: italic;
+            padding: 20px;
+            text-align: center;
+        }
+
+       .portfolio-modal {
+        max-width: 900px;
+        width: 90%;
+        max-height: 90vh;
+        padding: 24px;
+        overflow: hidden;
+    }
+
+    .portfolio-modal-list {
+        max-height: 65vh;
+        overflow-y: auto;
+        margin: 20px 0;
+        padding-right: 8px;
+    }
+
+    /* Кастомный скроллбар для списка портфолио */
+    .portfolio-modal-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .portfolio-modal-list::-webkit-scrollbar-track {
+        background: var(--color-surface-light);
+        border-radius: 10px;
+    }
+
+    .portfolio-modal-list::-webkit-scrollbar-thumb {
+        background: var(--accent-blue);
+        border-radius: 10px;
+    }
+
+    .portfolio-modal-list::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-hover);
+    }
+
+    .portfolio-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .portfolio-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .portfolio-project-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .portfolio-status.completed {
+        background: rgba(34, 197, 94, 0.15);
+        color: #22c55e;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+    }
+
+    .portfolio-details {
+        background: var(--color-surface-light);
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+    }
+
+    .portfolio-detail {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+    }
+
+    .portfolio-review-section {
+        background: rgba(var(--accent-rgb), 0.03);
+        padding: 12px;
+        border-radius: 12px;
+        margin-top: 12px;
+    }
+
+    .portfolio-review-label {
+        font-size: 0.8rem;
+        color: var(--accent-blue);
+        margin-bottom: 8px;
+    }
+
+    .portfolio-review-content {
+        background: var(--color-surface-light);
+        border-radius: 12px;
+        padding: 10px;
+    }
+
+    .portfolio-review-rating {
+        color: #fbbf24;
+        margin-bottom: 6px;
+    }
+
+    .portfolio-review-title {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .portfolio-review-comment {
+        font-size: 0.85rem;
+        color: var(--text-dim);
+    }
+
+    .portfolio-review-empty {
+        text-align: center;
+        padding: 16px;
+        color: var(--text-dim);
+    }
+
+        @media (max-width: 768px) {
+            .public-container {
+                padding: 24px 16px;
+            }
+            .profile-hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 20px;
+            }
+            .hero-meta {
+                justify-content: center;
+            }
+            .info-label {
+                width: 100%;
+                margin-bottom: 4px;
+            }
+            .info-row {
+                flex-direction: column;
+            }
+            .services-scroll {
+                max-height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<main class="public-container">
+    <div class="loader" id="loadingIndicator">
+        <div class="loader-spinner"></div>
+        <div>Загрузка профиля...</div>
+    </div>
+    <div id="profileContent" style="display: none;"></div>
+</main>
+
+<div id="portfolioModal" class="modal-overlay" style="display: none;">
+    <div class="modal-container portfolio-modal">
+        <h3 class="modal-title">Портфолио</h3>
+        <div id="portfolioModalContent" class="portfolio-modal-list">Загрузка...</div>
+        <button id="closePortfolioModalBtn" class="btn btn-secondary">Закрыть</button>
+    </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<!-- Модальное окно портфолио -->
+
+
+<script src="/src/scripts/utils/apiFetch.js"></script>
+<script src="/src/scripts/utils/renderHeader.js"></script>
+<script src="/src/scripts/utils/loadComponents.js"></script>
+
+<script>
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userType = urlParams.get('type');
+        const userId = urlParams.get('id');
+
+        const loadingDiv = document.getElementById('loadingIndicator');
+        const contentDiv = document.getElementById('profileContent');
+
+        if (!userType || !userId) {
+            loadingDiv.style.display = 'none';
+            contentDiv.style.display = 'block';
+            contentDiv.innerHTML = `
+                <div class="error-message">
+                    <strong>Не указаны параметры профиля</strong><br>
+                    Используйте: <code>?type=contractor&id=1</code> или <code>?type=customer&id=1</code>
+                </div>
+            `;
+            return;
+        }
+
+        async function loadProfile() {
+            try {
+                const response = await apiFetch(`/api/profile/${userType}/${userId}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const profile = await response.json();
+                profile.type = userType;
+
+                // Преобразуем servicesIds
+                let servicesIds = [];
+                if (profile.servicesIds) {
+                    if (typeof profile.servicesIds === 'string') {
+                        servicesIds = profile.servicesIds.split(',').map(s => s.trim()).filter(s => s);
+                    } else if (Array.isArray(profile.servicesIds)) {
+                        servicesIds = profile.servicesIds;
+                    }
+                }
+
+                let servicesData = [];
+                if (profile.type === 'contractor' && servicesIds.length > 0) {
+                    servicesData = await loadServices(servicesIds);
+                }
+
+                renderProfile(profile, servicesData);
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                loadingDiv.style.display = 'none';
+                contentDiv.style.display = 'block';
+                contentDiv.innerHTML = `<div class="error-message"><strong>Ошибка</strong><br>${error.message}</div>`;
+            }
+        }
+
+        async function loadServices(serviceIds) {
+            try {
+                const idsString = serviceIds.join(',');
+                const response = await apiFetch(`/api/services?ids=${idsString}`);
+                if (!response.ok) throw new Error('Ошибка загрузки услуг');
+                return await response.json();
+            } catch (error) {
+                console.error('Ошибка загрузки услуг:', error);
+                return [];
+            }
+        }
+
+
+        // ========== ПОРТФОЛИО (МОДАЛЬНОЕ ОКНО) ==========
+
+            const portfolioModal = document.getElementById('portfolioModal');
+            const portfolioModalContent = document.getElementById('portfolioModalContent');
+            const closePortfolioModalBtn = document.getElementById('closePortfolioModalBtn');
+
+            async function loadPortfolioForUser() {
+                if (!portfolioModalContent) return;
+                portfolioModalContent.innerHTML = '<div class="loader">Загрузка портфолио...</div>';
+
+                try {
+                    // Получаем завершённые сделки просматриваемого пользователя
+                    let deals = [];
+                    if (userType === 'customer') {
+                        const response = await apiFetch(`/api/deals/customer/${userId}`);
+                        const allDeals = await response.json();
+                        deals = allDeals.filter(deal => deal.status === 'COMPLETED');
+                    } else if (userType === 'contractor') {
+                        const response = await apiFetch(`/api/deals/contractor/${userId}`);
+                        const allDeals = await response.json();
+                        deals = allDeals.filter(deal => deal.status === 'COMPLETED');
+                    }
+
+                    if (deals.length === 0) {
+                        portfolioModalContent.innerHTML = '<div class="empty-state">Нет завершённых сделок</div>';
+                        return;
+                    }
+
+                    let html = '';
+                    for (const deal of deals) {
+                        const counterpartyId = userType === 'customer' ? deal.contractorId : deal.customerId;
+
+                        // Отзыв, который написал текущий пользователь о контрагенте (но здесь публичная страница – отзывы написанные другими о просматриваемом пользователе? Нет, нужно показать отзывы к сделке: мой отзыв (если смотрит владелец профиля) и отзыв контрагента. Но публичная страница – владелец профиля не авторизован. Поэтому проще показать оба отзыва, которые есть по сделке, но подписать, кто написал.
+                        // Для простоты сделаем как в личном кабинете, но без привязки к текущему пользователю – просто покажем отзывы, связанные с этой сделкой, с указанием автора.
+                        let myReview = null;
+                        let reviewAboutMe = null;
+                        try {
+                            // Отзыв, написанный владельцем профиля (тем, чей профиль смотрим) о контрагенте
+                            const reviewsResponse = await apiFetch(`/api/reviews/user/${userId}?userType=${userType}`);
+                            const reviews = await reviewsResponse.json();
+                            myReview = reviews.find(r => r.dealId === deal.id);
+                        } catch(e) {}
+
+                        try {
+                            // Отзыв, написанный контрагентом о владельце профиля
+                            const counterpartyUserType = userType === 'customer' ? 'contractor' : 'customer';
+                            const reviewsResponse = await apiFetch(`/api/reviews/user/${counterpartyId}?userType=${counterpartyUserType}`);
+                            const reviews = await reviewsResponse.json();
+                            reviewAboutMe = reviews.find(r => r.dealId === deal.id);
+                        } catch(e) {}
+
+                        // Имя контрагента
+                        let counterpartyName = 'Контрагент';
+                        try {
+                            let url;
+                            if (userType === 'customer') {
+                                url = `/api/contractors/${deal.contractorId}`;
+                            } else {
+                                url = `/api/customers/${deal.customerId}`;
+                            }
+                            const res = await apiFetch(url);
+                            if (res.ok) {
+                                const data = await res.json();
+                                if (userType === 'customer') {
+                                    counterpartyName = data.companyName || `${data.firstName} ${data.lastName}`;
+                                } else {
+                                    counterpartyName = `${data.name} ${data.surname}`;
+                                }
+                            }
+                        } catch(e) {}
+
+                        html += `
+                            <div class="portfolio-card">
+                                <div class="portfolio-card-header">
+                                    <div class="portfolio-project-name">${escapeHtml(deal.projectName || 'Без названия')}</div>
+                                    <span class="portfolio-status completed">✓ Завершён</span>
+                                </div>
+                                <div class="portfolio-details">
+                                    <div class="portfolio-detail"><span> Дата завершения:</span> <span>${deal.endDate ? new Date(deal.endDate).toLocaleDateString('ru-RU') : '—'}</span></div>
+                                    <div class="portfolio-detail"><span> Бюджет:</span> <span>${deal.price ? deal.price.toLocaleString() + ' ₽' : '—'}</span></div>
+                                    <div class="portfolio-detail"><span> ${userType === 'customer' ? 'Исполнитель:' : 'Заказчик:'}</span> <span>${escapeHtml(counterpartyName)}</span></div>
+                                </div>
+                                ${deal.description ? `<div class="portfolio-description-text" style="margin-top: 8px; padding: 8px; background: var(--color-surface-light); border-radius: 12px;">${escapeHtml(deal.description)}</div>` : ''}
+                                <div class="portfolio-review-section">
+                                    <div class="portfolio-review-label"> Отзыв о контрагенте</div>
+                                    ${myReview ? `
+                                        <div class="portfolio-review-content">
+                                            <div class="portfolio-review-rating">${'★'.repeat(myReview.rating)}${'☆'.repeat(5 - myReview.rating)}</div>
+                                            <div class="portfolio-review-title">${escapeHtml(myReview.title)}</div>
+                                            <div class="portfolio-review-comment">${escapeHtml(myReview.comment)}</div>
+                                            <div class="portfolio-review-date">${new Date(myReview.createdAt).toLocaleDateString('ru-RU')}</div>
+                                        </div>
+                                    ` : '<div class="portfolio-review-empty"> Отзыв не оставлен</div>'}
+                                </div>
+                                <div class="portfolio-review-section">
+                                    <div class="portfolio-review-label"> Отзыв контрагента</div>
+                                    ${reviewAboutMe ? `
+                                        <div class="portfolio-review-content">
+                                            <div class="portfolio-review-rating">${'★'.repeat(reviewAboutMe.rating)}${'☆'.repeat(5 - reviewAboutMe.rating)}</div>
+                                            <div class="portfolio-review-title">${escapeHtml(reviewAboutMe.title)}</div>
+                                            <div class="portfolio-review-comment">${escapeHtml(reviewAboutMe.comment)}</div>
+                                            <div class="portfolio-review-date">${new Date(reviewAboutMe.createdAt).toLocaleDateString('ru-RU')}</div>
+                                        </div>
+                                    ` : '<div class="portfolio-review-empty"> Отзыв не оставлен</div>'}
+                                </div>
+                            </div>
+                        `;
+                    }
+                    portfolioModalContent.innerHTML = html;
+                } catch (error) {
+                    console.error('Ошибка загрузки портфолио:', error);
+                    portfolioModalContent.innerHTML = '<div class="empty-state">Ошибка загрузки</div>';
+                }
+            }
+
+            function openPortfolioModal() {
+                if (!portfolioModal) return;
+                portfolioModal.style.display = 'flex';
+                loadPortfolioForUser();
+            }
+
+            // Навешиваем обработчик на кнопку "Портфолио"
+            document.getElementById('contactUserBtn')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPortfolioModal();
+            });
+
+            // Закрытие модалки
+            closePortfolioModalBtn?.addEventListener('click', () => {
+                if (portfolioModal) portfolioModal.style.display = 'none';
+            });
+            portfolioModal?.addEventListener('click', (e) => {
+                if (e.target === portfolioModal) portfolioModal.style.display = 'none';
+            });
+
+        function formatDate(dateString) {
+            if (!dateString) return '—';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' });
+            } catch (e) {
+                return dateString;
+            }
+        }
+
+        function renderStarsReadonly(rating) {
+            const numRating = parseFloat(rating) || 0;
+            const fullStars = Math.floor(numRating);
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += i <= fullStars ? '<span class="star-filled">★</span>' : '<span class="star-empty">☆</span>';
+            }
+            return starsHtml;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
+        }
+
+        function groupServices(services) {
+            const grouped = {};
+            services.forEach(service => {
+                if (!grouped[service.name]) grouped[service.name] = [];
+                grouped[service.name].push(service.description || 'Без описания');
+            });
+            return grouped;
+        }
+
+        async function loadReviewsForUser(uid, utype) {
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        const reviewsFooter = document.getElementById('reviewsFooter');
+        if (!reviewsContainer) return;
+
+        try {
+            const response = await apiFetch(`/api/reviews/user/${uid}?userType=${utype}`);
+            if (!response.ok) throw new Error('Ошибка загрузки отзывов');
+
+            const reviews = await response.json();
+
+            if (reviews.length === 0) {
+                reviewsContainer.innerHTML = '<div class="review-item">Пока нет отзывов</div>';
+                if (reviewsFooter) reviewsFooter.style.display = 'none';
+                return;
+            }
+
+            if (reviewsFooter) reviewsFooter.style.display = 'flex';
+
+            const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+            const ratingRounded = avgRating.toFixed(1);
+            const starsHtml = '★'.repeat(Math.round(avgRating)) + '☆'.repeat(5 - Math.round(avgRating));
+
+            const reviewsSummary = document.getElementById('reviewsSummary');
+            if (reviewsSummary) {
+                reviewsSummary.innerHTML = `
+                    <div class="stars-readonly">${starsHtml}</div>
+                    <span><strong>${ratingRounded}</strong> из 5 (${reviews.length} ${getDeclension(reviews.length, 'отзыв', 'отзыва', 'отзывов')})</span>
+                `;
+            }
+
+            // Загружаем имена авторов
+            const reviewsWithNames = [];
+            for (const review of reviews) {
+                let authorName = 'Пользователь';
+                try {
+                    if (review.receiverType === 'customer') {
+                        // Отзыв о заказчике → автор — подрядчик
+                        const res = await apiFetch(`/api/contractors/${review.contractorId}`);
+                        if (res.ok) {
+                            const data = await res.json();
+                            authorName = data.companyName || `${data.firstName} ${data.lastName}`;
+                        }
+                    } else if (review.receiverType === 'contractor') {
+                        // Отзыв о подрядчике → автор — заказчик
+                        const res = await apiFetch(`/api/customers/${review.customerId}`);
+                        if (res.ok) {
+                            const data = await res.json();
+                            authorName = `${data.name} ${data.surname}`;
+                        }
+                    }
+                } catch(e) {
+                    console.error('Ошибка загрузки имени автора:', e);
+                }
+                reviewsWithNames.push({ ...review, authorName });
+            }
+
+            reviewsContainer.innerHTML = reviewsWithNames.map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-author">${escapeHtml(review.authorName)}</span>
+                        <span class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+                    </div>
+                    <div class="review-title">${escapeHtml(review.title)}</div>
+                    <div class="review-comment">${escapeHtml(review.comment)}</div>
+                    <div class="review-date">${new Date(review.createdAt).toLocaleDateString('ru-RU')}</div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Ошибка загрузки отзывов:', error);
+            reviewsContainer.innerHTML = '<div class="review-item">Ошибка загрузки отзывов</div>';
+        }
+    }
+
+        function getDeclension(count, one, few, many) {
+            const lastDigit = count % 10;
+            const lastTwo = count % 100;
+            if (lastTwo >= 11 && lastTwo <= 19) return many;
+            if (lastDigit === 1) return one;
+            if (lastDigit >= 2 && lastDigit <= 4) return few;
+            return many;
+        }
+
+        let allReviewsModal = null;
+
+       function openAllReviewsModal() {
+        const uid = userId;
+        const utype = userType;
+        if (!uid || !utype) return;
+
+        if (!allReviewsModal) {
+            allReviewsModal = document.createElement('div');
+            allReviewsModal.className = 'modal-overlay';
+            allReviewsModal.innerHTML = `
+                <div class="modal-container">
+                    <h3 class="modal-title">Все отзывы</h3>
+                    <div id="allReviewsContent" class="reviews-list-container">Загрузка...</div>
+                    <button id="closeAllReviewsBtn" class="btn-secondary">Закрыть</button>
+                </div>
+            `;
+            document.body.appendChild(allReviewsModal);
+
+            allReviewsModal.addEventListener('click', (e) => {
+                if (e.target === allReviewsModal) allReviewsModal.style.display = 'none';
+            });
+
+            document.getElementById('closeAllReviewsBtn')?.addEventListener('click', () => {
+                allReviewsModal.style.display = 'none';
+            });
+        }
+
+        allReviewsModal.style.display = 'flex';
+        const content = document.getElementById('allReviewsContent');
+        content.innerHTML = '<div class="loader">Загрузка...</div>';
+
+        apiFetch(`/api/reviews/user/${uid}?userType=${utype}`)
+            .then(res => res.json())
+            .then(async (reviews) => {
+                if (reviews.length === 0) {
+                    content.innerHTML = '<div class="empty-state">Пока нет отзывов</div>';
+                    return;
+                }
+                // Загружаем имена авторов
+                const reviewsWithNames = [];
+                for (const review of reviews) {
+                    let authorName = 'Пользователь';
+                    try {
+                        if (review.receiverType === 'customer') {
+                            const res = await apiFetch(`/api/contractors/${review.contractorId}`);
+                            if (res.ok) {
+                                const data = await res.json();
+                                authorName = data.companyName || `${data.firstName} ${data.lastName}`;
+                            }
+                        } else if (review.receiverType === 'contractor') {
+                            const res = await apiFetch(`/api/customers/${review.customerId}`);
+                            if (res.ok) {
+                                const data = await res.json();
+                                authorName = `${data.name} ${data.surname}`;
+                            }
+                        }
+                    } catch(e) {}
+                    reviewsWithNames.push({ ...review, authorName });
+                }
+                content.innerHTML = reviewsWithNames.map(review => `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-author">${escapeHtml(review.authorName)}</span>
+                            <span class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+                        </div>
+                        <div class="review-title">${escapeHtml(review.title)}</div>
+                        <div class="review-comment">${escapeHtml(review.comment)}</div>
+                        <div class="review-date">${new Date(review.createdAt).toLocaleDateString('ru-RU')}</div>
+                    </div>
+                `).join('');
+            })
+            .catch(err => {
+                console.error('Ошибка:', err);
+                content.innerHTML = '<div class="empty-state">Ошибка загрузки</div>';
+            });
+    }
+
+       function renderProfile(profile, services) {
+    const userType = profile.type;
+
+    let fullName = '';
+    if (userType === 'contractor') {
+        const parts = [profile.lastName, profile.firstName, profile.patronymic].filter(p => p);
+        fullName = parts.join(' ') || profile.companyName || 'Подрядчик';
+    } else {
+        const parts = [profile.lastName, profile.firstName, profile.patronymic].filter(p => p);
+        fullName = parts.join(' ') || 'Клиент';
+    }
+
+    const companyDisplay = profile.companyName ? `Компания: ${profile.companyName}` : (userType === 'contractor' ? 'Частный специалист' : 'Частное лицо');
+    const avatarUrl = profile.profileImage || '/src/images/defaultAvatar.webp';
+    const about = userType === 'contractor' ? (profile.aboutCompany || 'Информация отсутствует') : (profile.about || 'Информация отсутствует');
+
+    let servicesHtml = '';
+    if (userType === 'contractor' && services.length > 0) {
+        const grouped = groupServices(services);
+        let groupsHtml = '';
+        for (const [name, descriptions] of Object.entries(grouped)) {
+            groupsHtml += `
+                <div class="service-group">
+                    <h4>${escapeHtml(name)}</h4>
+                    <ul>${descriptions.map(desc => `<li>${escapeHtml(desc)}</li>`).join('')}</ul>
+                </div>
+            `;
+        }
+        servicesHtml = `<div class="services-scroll">${groupsHtml}</div>`;
+    } else if (userType === 'contractor') {
+        servicesHtml = '<div class="empty-value">Услуги не указаны</div>';
+    } else {
+        servicesHtml = '<div class="empty-value">Клиент не предоставляет услуги</div>';
+    }
+
+    let contactLink = '#';
+    if (userType === 'contractor') {
+        contactLink = `/src/pages/workflow/project_workflow.html?contractorId=${profile.id}`;
+    } else {
+        contactLink = `/src/pages/workflow/project_workflow.html?customerId=${profile.id}`;
+    }
+
+    const html = `
+        <div class="profile-hero">
+            <div class="hero-avatar">
+                <img src="${escapeHtml(avatarUrl)}" alt="Аватар" onerror="this.src='/src/images/defaultAvatar.webp'">
+            </div>
+            <div class="hero-info">
+                <div class="hero-name">${escapeHtml(fullName)}</div>
+                <div class="hero-badge">${escapeHtml(companyDisplay)}</div>
+                <div class="hero-meta">
+                    <button class="btn-contact" id="portfolioBtn">Портфолио</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <h2>Отзывы</h2>
+            <div id="reviewsContainer" class="reviews-list">Загрузка отзывов...</div>
+            <div id="reviewsFooter" class="reviews-footer" style="display: none;">
+                <div id="reviewsSummary" class="reviews-summary"></div>
+                <button id="viewAllReviewsBtn" class="btn-outline-light">Все отзывы</button>
+            </div>
+        </div>
+
+        <div class="profile-grid">
+            <div class="info-card">
+                <h3>Контакты</h3>
+                <div>
+                    <div class="info-row"><div class="info-label">Телефон</div><div class="info-value">${escapeHtml(profile.phone || '—')}</div></div>
+                    <div class="info-row"><div class="info-label">Email</div><div class="info-value">${escapeHtml(profile.email || '—')}</div></div>
+                    <div class="info-row"><div class="info-label">Адрес</div><div class="info-value">${escapeHtml(profile.address || '—')}</div></div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3>Общие сведения</h3>
+                <div>
+                    <div class="info-row"><div class="info-label">Статус</div><div class="info-value">${userType === 'contractor' ? 'Исполнитель' : 'Заказчик'}</div></div>
+                    <div class="info-row"><div class="info-label">Форма регистрации</div><div class="info-value">${escapeHtml(profile.businessType || '—')}</div></div>
+                    <div class="info-row"><div class="info-label">Дата регистрации</div><div class="info-value">${formatDate(profile.createdAt)}</div></div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3>Услуги</h3>
+                ${servicesHtml}
+            </div>
+            <div class="info-card full-width-card">
+                <h3>${userType === 'contractor' ? 'О компании' : 'О себе'}</h3>
+                <div class="about-text">${escapeHtml(about)}</div>
+            </div>
+        </div>
+    `;
+
+    contentDiv.innerHTML = html;
+    loadingDiv.style.display = 'none';
+    contentDiv.style.display = 'block';
+
+    document.getElementById('contactUserBtn')?.addEventListener('click', () => {
+        window.location.href = contactLink;
+    });
+
+    document.getElementById('viewAllReviewsBtn')?.addEventListener('click', openAllReviewsModal);
+    document.getElementById('portfolioBtn')?.addEventListener('click', openPortfolioModal);
+
+    setTimeout(() => {
+        loadReviewsForUser(userId, userType);
+    }, 100);
+}
+
+        loadProfile();
+    })();
+</script>
+
+</body>
+</html>

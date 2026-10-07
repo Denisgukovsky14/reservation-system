@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignHub — Настройки</title>
+    <style>
+        
+        :root {
+            --bg-body: #0b0f19;
+            --bg-input: #1f2937;
+            --bg-header: #111827;
+            --accent-blue: #3b82f6;
+            --text-main: #ffffff;
+            --text-dim: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--bg-header);
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+        }
+
+        .logo-icon {
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .user-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-small {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* --- SETTINGS CONTENT --- */
+        .settings-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .settings-section {
+            margin-bottom: 50px;
+        }
+
+        /* Profile Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: var(--bg-input);
+            border: 1px solid transparent;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        .btn-save {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover {
+            opacity: 0.9;
+        }
+
+        /* Notifications & General */
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        .row-info h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .row-info p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .row-value {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #374151;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(20px);
+        }
+
+        .btn-logout {
+            background: #2d3748;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #3d4a5e;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 12px 20px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon"></div> DesignHub
+            </div>
+            <nav>
+                <a href="#">Главная</a>
+                <a href="#">Проекты</a>
+                <a href="#">Команда</a>
+                <a href="#">Сообщения</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="user-nav">
+                <span>🔔</span>
+                <img src="https://i.pravatar.cc/100?img=26" class="avatar-small" alt="Профиль">
+            </div>
+        </div>
+    </header>
+
+    <div class="settings-container">
+        <h1>Настройки</h1>
+
+        <section class="settings-section">
+            <h2>Профиль</h2>
+            <div class="form-group">
+                <label>Имя</label>
+                <input type="text" value="Sophia Carter">
+            </div>
+            <div class="form-group">
+                <label>Электронная почта</label>
+                <input type="email" value="sophia.carter@example.com">
+            </div>
+            <div class="form-group">
+                <label>Номер телефона</label>
+                <input type="tel" value="+1 (555) 000-00-00">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <div class="password-field">
+                    <input type="password" value="password123">
+                    <span class="eye-icon">👁️</span>
+                </div>
+            </div>
+            <button class="btn-save">Сохранить изменения</button>
+        </section>
+
+        <section class="settings-section">
+            <h2>Уведомления</h2>
+            <div class="settings-row">
+                <div class="row-info">
+                    <h4>Уведомления по электронной почте</h4>
+                    <p>Получайте уведомления о новых сообщениях, проектах и обновлениях платформы.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <h4>Push-уведомления</h4>
+                    <p>Получайте мгновенные уведомления на ваше устройство о важных событиях.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Общие настройки</h2>
+            <div class="settings-row">
+                <div class="row-info">
+                    <h4>Язык</h4>
+                    <p>Измените язык интерфейса приложения.</p>
+                </div>
+                <div class="row-value">Русский</div>
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <h4>Тема</h4>
+                    <p>Выберите между светлой и темной темой оформления.</p>
+                </div>
+                <div class="row-value">Темная</div>
+            </div>
+            <button class="btn-logout">Выйти</button>
+        </section>
+    </div>
+
+</body>
+
+</html>

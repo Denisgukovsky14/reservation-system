@@ -1,0 +1,136 @@
+:root {
+    /* Цвета */
+    --color-bg: #0B0C0E;
+    --color-surface: #14161A;
+    --color-surface-light: #1E2025;
+    --color-text: #EAECEF;
+    --color-text-muted: #A6ADBB;
+    --color-text-secondary: #8A919F;
+    --color-brand: #5F8BFF;
+    --color-brand-hover: #4A7DFF;
+    --color-accent: #22C55E;
+    --color-warning: #F59E0B;
+    --color-danger: #EF4444;
+    --bg-main: #111520;
+    --bg-secondary: #242c44;
+    --primary-blue: #5b7cff;
+    --text-white: #ffffff;
+    --text-muted: #8b94a7;
+    --border-header: #1e2536;
+    --error-color: #ff5b5b;
+    /* Цвет для ошибок */
+    --bg-deep: #0b0f17;
+    --bg-card: #161b26;
+    --accent-blue: #5b7cff;
+    --accent-hover: #4a6aeb;
+    --text-dim: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+    --border-footer: rgba(255, 255, 255, 0.1);
+    --premium-gold: #f59e0b;
+    --success-green: #10b981;
+    --bg-body: #0b0f19;
+    --bg-sidebar: #111827;
+    --bg-chat-area: #0b0f19;
+    --bg-bubble-in: #1f2937;
+    --bg-bubble-out: #3b82f6;
+    --text-main: #ffffff;
+    --bg-header: #111827;
+    --bg-input: #0b0f19;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --bg-page: var(--bg-card);
+    --btn-primary-bg: var(--accent-blue);
+    --btn-primary-hover: var(--accent-hover);
+    --btn-secondary-bg: #1e2536;
+    --btn-secondary-hover: #262f45;
+    --accent-rgb: 91, 124, 255;
+    --bg-footer: #080b11;
+
+    /* Типография */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Пробелы */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* Сглаживание */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Тени */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.25);
+
+    /* Переходы */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.35s ease;
+
+    /* Слои */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal: 1040;
+    --z-popover: 1050;
+    --z-tooltip: 1060;
+}
+
+/* Светлая тема — палитра Fohlio: мятный фон позади блоков, сами блоки белые,
+   основной акцент — зелёный, маленькие кнопки взаимодействия — тёмно-синие (navy) */
+:root[data-theme="light"] {
+    --color-bg: #EDF5F1;
+    --color-surface: #FFFFFF;
+    --color-surface-light: #F5F5F5;
+    --color-text: #1B1B1B;
+    --color-text-muted: #646464;
+    --color-text-secondary: #333333;
+    --color-brand: #102048;
+    --color-brand-hover: #1A3068;
+    --color-accent: #76BE50;
+    --color-warning: #D99A2B;
+    --color-danger: #F31313;
+    --bg-main: #EDF5F1;
+    --bg-secondary: #E7EAF6;
+    --primary-blue: #76BE50;
+    --text-white: #242424;
+    --text-muted: #646464;
+    --border-header: #BFE0CB;
+    --error-color: #F31313;
+    --bg-deep: #EDF5F1;
+    --bg-card: #FFFFFF;
+    --accent-blue: #76BE50;
+    --accent-hover: #6BB021;
+    --text-dim: #646464;
+    --border: #BFE0CB;
+    --premium-gold: #D99A2B;
+    --success-green: #76BE50;
+    --bg-body: #EDF5F1;
+    --bg-sidebar: #FFFFFF;
+    --bg-chat-area: #EDF5F1;
+    --bg-bubble-in: #FFFFFF;
+    --bg-bubble-out: #76BE50;
+    --text-main: #1B1B1B;
+    --bg-header: #FFFFFF;
+    --bg-input: #FFFFFF;
+    --accent-green: #76BE50;
+    --accent-red: #F31313;
+    --bg-page: #EDF5F1;
+    --btn-primary-bg: #76BE50;
+    --btn-primary-hover: #6BB021;
+    --btn-secondary-bg: #102048;
+    --btn-secondary-hover: #1A3068;
+    --accent-rgb: 118, 190, 80;
+    --bg-footer: #102048;
+    --border-footer: rgba(255, 255, 255, 1.0);
+}

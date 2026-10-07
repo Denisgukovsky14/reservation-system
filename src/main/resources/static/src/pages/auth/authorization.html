@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>(function(){function a(){if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}a();window.addEventListener('pageshow',function(e){if(e.persisted)a();});})();</script>
+    <link href="/src/styles/main.css" rel="stylesheet" type="text/css">
+    <link href="/src/styles/pages/auth.css" rel="stylesheet" type="text/css">
+    <title>DesignHub — Вход и регистрация</title>
+</head>
+<body>
+
+<!-- Динамический хедер -->
+<div id="header-placeholder"></div>
+
+<main>
+    <!-- Форма входа -->
+    <div class="login-wrapper" id="loginSection">
+        <h1>Добро пожаловать в ДизайнХаб!</h1>
+
+        <form id="loginForm" novalidate>
+            <div class="form-group" id="emailGroup">
+                <label for="email">Адрес электронной почты</label>
+                <input type="email" id="email" placeholder="Введите ваш адрес электронной почты">
+                <span class="error-message">Введите корректный адрес почты</span>
+            </div>
+
+            <div class="form-group" id="passGroup">
+                <label for="password">Введите пароль</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="Введите ваш пароль">
+                    <button type="button" class="toggle-password" id="toggleBtn">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <span class="error-message">Пароль должен быть не менее 8 символов</span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-blue">Авторизоваться</button>
+                <button type="button" class="btn btn-dark" id="showRegisterBtn">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Форма регистрации -->
+    <div class="login-wrapper" id="registerSection" style="display: none; max-width: 600px;">
+        <h1>Создать аккаунт</h1>
+
+        <form id="registerForm" novalidate>
+            <!-- Обязательные поля -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="regName">Имя <span style="color: red;">*</span></label>
+                    <input type="text" id="regName" placeholder="Иван" required maxlength="50">
+                    <span class="error-message">Введите имя</span>
+                </div>
+                <div class="form-group">
+                    <label for="regSurname">Фамилия <span style="color: red;">*</span></label>
+                    <input type="text" id="regSurname" placeholder="Иванов" required maxlength="50">
+                    <span class="error-message">Введите фамилию</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="regPatronymic">Отчество</label>
+                <input type="text" id="regPatronymic" placeholder="Иванович" maxlength="50">
+                <span class="field-hint">Необязательное поле</span>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="regPhone">Номер телефона <span style="color: red;">*</span></label>
+                    <input type="tel" id="regPhone" placeholder="+7 (999) 000-00-00" required maxlength="20">
+                    <span class="error-message">Введите корректный номер телефона</span>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Электронная почта <span style="color: red;">*</span></label>
+                    <input type="email" id="regEmail" placeholder="example@mail.ru" required maxlength="100">
+                    <span class="error-message">Введите корректный адрес почты</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="regPassword">Пароль <span style="color: red;">*</span></label>
+                    <div class="input-wrapper">
+                        <input type="password" id="regPassword" placeholder="Придумайте пароль" required maxlength="50">
+                        <button type="button" class="toggle-password" id="toggleRegBtn">
+                            <svg id="eyeRegIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="field-hint">Минимум 8 символов, заглавная и строчная буквы, цифра, спецсимвол</span>
+                    <span class="error-message">Пароль слишком слабый</span>
+                </div>
+            </div>
+
+            <!-- Необязательные поля для юр. лица / ИП -->
+            <div class="form-group">
+                <label for="regCompanyName">Название компании</label>
+                <input type="text" id="regCompanyName" placeholder="Если имеется" maxlength="255">
+                <span class="field-hint">Необязательное поле</span>
+            </div>
+
+            <div class="form-group">
+                <label for="regBusinessType">Форма регистрации бизнеса</label>
+                <select id="regBusinessType">
+                    <option value="">Не выбрано</option>
+                    <option value="ИП">ИП</option>
+                    <option value="ООО">ООО</option>
+                    <option value="АО">АО</option>
+                    <option value="ПАО">ПАО</option>
+                    <option value="Самозанятый">Самозанятый</option>
+                </select>
+                <span class="field-hint">Необязательное поле</span>
+            </div>
+
+            <div class="form-group">
+                <label for="regAddress">Адрес</label>
+                <input type="text" id="regAddress" placeholder="г. Москва, ул. Тверская, д. 1" maxlength="255">
+                <span class="field-hint">Необязательное поле</span>
+            </div>
+
+            <div class="form-group">
+                <label for="regAbout">О себе / О компании</label>
+                <textarea id="regAbout" rows="3" placeholder="Расскажите немного о себе или своей компании..."></textarea>
+                <span class="field-hint">Необязательное поле</span>
+            </div>
+
+            <!-- CAPTCHA -->
+            <div class="form-group">
+                <div class="captcha-box">
+                    <label class="radio-label">
+                        <input type="checkbox" id="regCaptcha"> Я не робот (CAPTCHA)
+                    </label>
+                </div>
+                <span class="error-message">Подтвердите, что вы не робот</span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-blue">Зарегистрироваться</button>
+                <button type="button" class="btn btn-dark" id="showLoginBtn">Уже есть аккаунт? Войти</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/src/scripts/utils/apiFetch.js"></script>
+<script src="/src/scripts/utils/renderHeader.js"></script>
+<script src="/src/scripts/utils/loadComponents.js"></script>
+<script src="/src/scripts/components/pricing.js"></script>
+<script src="/src/scripts/pages/auth.js"></script>
+<script>
+    // Определяем, какую форму показывать по параметру ?tab=register или ?tab=login
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
+
+        const loginSection = document.getElementById('loginSection');
+        const registerSection = document.getElementById('registerSection');
+
+        if (tab === 'register') {
+            if (loginSection) loginSection.style.display = 'none';
+            if (registerSection) registerSection.style.display = 'block';
+        } else if (tab === 'login') {
+            if (loginSection) loginSection.style.display = 'block';
+            if (registerSection) registerSection.style.display = 'none';
+        } else {
+            // По умолчанию показываем форму входа
+            if (loginSection) loginSection.style.display = 'block';
+            if (registerSection) registerSection.style.display = 'none';
+        }
+    })();
+</script>
+</body>
+</html>

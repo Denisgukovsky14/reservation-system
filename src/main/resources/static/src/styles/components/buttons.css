@@ -1,0 +1,33 @@
+/* --- Общие стили кнопок --- */
+.btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    margin: 0px 0 0 0 !important
+}
+
+.btn-blue {
+    background: var(--btn-primary-bg);
+    color: white;
+}
+
+.btn-blue:hover {
+    background: var(--btn-primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-dark {
+    background: var(--btn-secondary-bg);
+    color: white;
+    border: 1px solid var(--border);
+}
+
+.btn-dark:hover {
+    background: var(--btn-secondary-hover);
+}

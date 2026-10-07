@@ -1,0 +1,561 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-white);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+}
+
+/* Базовые стили типографики */
+h2, h3 {
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+/* 2. БАЗОВЫЕ КОМПОНЕНТЫ (Кнопки и формы) */
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    outline: none;
+}
+
+.btn-blue {
+    background-color: var(--btn-primary-bg);
+    color: #fff;
+}
+
+.btn-blue:hover {
+    background-color: var(--btn-primary-hover);
+}
+
+.btn-dark {
+    background-color: transparent;
+    color: var(--text-white);
+    border: 1px solid var(--border);
+}
+
+.btn-dark:hover {
+    background-color: var(--color-surface-light);
+}
+
+/* Формы */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.custom-select,
+.workflow-form input,
+.workflow-form textarea {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.custom-select:focus,
+.workflow-form input:focus,
+.workflow-form textarea:focus {
+    border-color: var(--primary-blue);
+}
+
+/* Кастомный скроллбар для эстетики */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+
+/* 3. СПЕЦИФИЧНЫЕ СТИЛИ СТРАНИЦЫ УПРАВЛЕНИЯ (Workflow) */
+.workflow-main {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.workflow-container {
+    width: 100%;
+    max-width: 1100px;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Stepper (Навигация по шагам) --- */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.4;
+    transition: 0.3s;
+    cursor: default;
+}
+
+.step.active,
+.step.completed {
+    opacity: 1;
+}
+
+.step-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-surface-light);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    color: var(--text-muted);
+}
+
+.step.active .step-circle {
+    border-color: var(--primary-blue);
+    background: rgba(var(--accent-rgb), 0.1);
+    color: var(--primary-blue);
+}
+
+.step.completed .step-circle {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: #fff;
+}
+
+.step-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-white);
+}
+
+.step-line {
+    flex-grow: 1;
+    height: 2px;
+    background: var(--border);
+    margin: 0 15px;
+    position: relative;
+    top: -15px;
+}
+
+/* --- Контент шагов --- */
+.step-panel {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.step-panel.active {
+    display: block;
+}
+
+.step-panel h2 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+/* --- Карточки и Гриды --- */
+.tech-map-grid,
+.management-grid,
+.monitoring-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.tech-card,
+.management-panel,
+.progress-panel,
+.chat-panel {
+    background: var(--bg-deep);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.tech-card h3,
+.management-panel h3,
+.progress-panel h3,
+.chat-panel h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.safe-deal p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Загрузка файлов */
+.upload-box {
+    border: 2px dashed var(--border);
+    padding: 3rem 1rem;
+    text-align: center;
+    border-radius: 10px;
+    color: var(--text-muted);
+    background: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: 0.2s;
+}
+
+.upload-box:hover {
+    border-color: var(--primary-blue);
+    background: rgba(var(--accent-rgb), 0.02);
+}
+
+/* Элементы управления сделкой */
+.contractor-card {
+    background: var(--bg-main);
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid var(--border);
+}
+
+.contractor-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contractor-info strong {
+    font-size: 1.1rem;
+}
+
+.rating {
+    color: #fbbf24; /* Желтый цвет звезды */
+    font-size: 0.9rem;
+}
+
+.contractor-price {
+    font-weight: 500;
+    color: var(--accent-blue);
+}
+
+/* Элементы мониторинга */
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-main);
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--primary-blue);
+    border-radius: 4px;
+    transition: width 0.5s;
+}
+
+.milestones {
+    list-style: none;
+}
+
+.milestones li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.milestones li:last-child {
+    border-bottom: none;
+}
+
+.milestones li.completed {
+    color: #10b981; /* Зеленый для завершенных */
+}
+
+.milestones li.active {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* Чат */
+.chat-window {
+    height: 300px;
+    background: var(--bg-main);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid var(--border);
+}
+
+.message {
+    max-width: 85%;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.message strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.message.incoming {
+    background: var(--bg-deep);
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+.message.outgoing {
+    background: var(--primary-blue);
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    outline: none;
+}
+
+.chat-input input:focus {
+    border-color: var(--primary-blue);
+}
+
+/* Действия внизу панелей */
+.form-actions.right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+/* Выпадающий список услуг */
+
+.services-selector {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.service-group {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+}
+
+.service-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.service-group h4 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--accent-blue);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-group h4:hover {
+    opacity: 0.8;
+}
+
+.service-group .toggle-icon {
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+}
+
+.service-group .service-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.service-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-surface-light);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.service-item:hover {
+    background: rgba(var(--accent-rgb), 0.2);
+}
+
+.service-item.selected {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.service-item input {
+    display: none;
+}
+
+.service-item span {
+    cursor: pointer;
+}
+
+.selected-services-list {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(var(--accent-rgb), 0.1);
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+.selected-services-list strong {
+    color: var(--accent-blue);
+}
+
+.selected-services-list ul {
+    margin-top: 8px;
+    padding-left: 20px;
+}
+
+/* Стили для загрузки картинок */
+
+.file-list {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+}
+
+.file-item .file-name {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-item .remove-file {
+    cursor: pointer;
+    color: var(--error-color);
+    font-weight: bold;
+    background: none;
+    border: none;
+    color: #ff4444;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.file-item .remove-file:hover {
+    color: #ff8888;
+}
+
+.file-item .file-preview {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+
+/* Анимация переключения вкладок */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

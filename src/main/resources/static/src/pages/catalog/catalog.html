@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>(function(){function a(){if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}a();window.addEventListener('pageshow',function(e){if(e.persisted)a();});})();</script>
+    <link href="/src/styles/main.css" rel="stylesheet" type="text/css">
+    <link href="/src/styles/pages/catalog.css" rel="stylesheet" type="text/css">
+    <title>DesignHub — Каталог подрядчиков</title>
+    <style>
+        /* Дополнительные стили для пустого состояния */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .empty-state p {
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .empty-state .btn {
+            display: inline-block;
+            padding: 12px 24px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Стили для динамической загрузки подрядчиков */
+        .contractors-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contractor-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.2s;
+        }
+
+        .contractor-card-link:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Кастомный модальный алерт */
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+}
+
+.custom-alert-content {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 32px 28px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: alertFadeIn 0.2s ease-out;
+}
+
+@keyframes alertFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.custom-alert-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.custom-alert-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+
+.custom-alert-message {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.custom-alert-btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    background: var(--accent-blue);
+    color: white;
+    transition: 0.2s;
+}
+
+.custom-alert-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.contact-btn {
+   margin: 20px 0px 0px 0px !important;
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- Динамический хедер -->
+<div id="header-placeholder"></div>
+
+<div class="layout">
+    <aside>
+        <h3 class="filter-title">Фильтры</h3>
+
+        <div class="filter-section">
+            <span class="filter-group-name">Материалы</span>
+            <label class="checkbox-item"><input type="checkbox" value="wood"> Дерево</label>
+            <label class="checkbox-item"><input type="checkbox" value="metal"> Металл</label>
+            <label class="checkbox-item"><input type="checkbox" value="glass"> Стекло</label>
+            <label class="checkbox-item"><input type="checkbox" value="stone"> Камень</label>
+            <label class="checkbox-item"><input type="checkbox" value="plastic"> Пластик</label>
+            <button id="resetLimitsBtn" style="margin-bottom: 16px; padding: 8px 16px; background: #ff4444; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                Сбросить лимит откликов
+            </button>
+        </div>
+
+        <div class="filter-section">
+            <span class="filter-group-name">Услуги/Этапы</span>
+            <label class="checkbox-item"><input type="checkbox" value="design"> Проектирование</label>
+            <label class="checkbox-item"><input type="checkbox" value="construction"> Строительство</label>
+            <label class="checkbox-item"><input type="checkbox" value="finishing"> Отделка</label>
+            <label class="checkbox-item"><input type="checkbox" value="furniture"> Меблировка</label>
+        </div>
+
+        <div class="filter-section">
+            <span class="filter-group-name">Сложность</span>
+            <label class="checkbox-item"><input type="checkbox" value="easy"> Простая</label>
+            <label class="checkbox-item"><input type="checkbox" value="medium"> Средняя</label>
+            <label class="checkbox-item"><input type="checkbox" value="hard"> Сложная</label>
+        </div>
+
+        <button id="applyFiltersBtn" class="btn btn-blue" style="width: 100%; margin-top: 20px;">Применить фильтры</button>
+    </aside>
+
+    <main>
+        <div class="view-controls">
+            <h1 class="page-title">Подрядчики</h1>
+            <div class="view-buttons">
+                <button class="view-btn active" id="btn-cards">Карточки</button>
+
+            </div>
+        </div>
+
+        <!-- Карточки подрядчиков (будут загружаться динамически) -->
+        <div id="cards-view">
+            <div class="empty-state">
+                <h3>Загрузка подрядчиков...</h3>
+                <p>Пожалуйста, подождите</p>
+            </div>
+        </div>
+
+        <!-- Таблица подрядчиков (будет загружаться динамически) -->
+        <div id="table-view" class="hidden">
+            <div class="empty-state">
+                <h3>Загрузка подрядчиков...</h3>
+                <p>Пожалуйста, подождите</p>
+            </div>
+        </div>
+
+        <div class="pagination" id="pagination" style="display: none;">
+            <!-- Пагинация будет добавляться динамически -->
+        </div>
+    </main>
+</div>
+
+<!-- Футер -->
+<div id="footer-placeholder"></div>
+
+<div id="customAlert" class="custom-alert" style="display: none;">
+    <div class="custom-alert-content">
+        <div class="custom-alert-icon">✅</div>
+        <h3 id="alertTitle" class="custom-alert-title">Успех!</h3>
+        <p id="alertMessage" class="custom-alert-message"></p>
+        <button id="alertOkBtn" class="btn btn-blue custom-alert-btn">Понятно</button>
+    </div>
+</div>
+
+<script src="/src/scripts/utils/apiFetch.js"></script>
+<script src="/src/scripts/utils/renderHeader.js"></script>
+<script src="/src/scripts/utils/loadComponents.js"></script>
+<script src="/src/scripts/pages/catalog.js"></script>
+<!--
+<script type="module">
+    import { loadPricingModal } from '/src/components/pricing/pricing.js';
+    loadPricingModal();
+</script>
+-->
+
+
+</body>
+
+</html>

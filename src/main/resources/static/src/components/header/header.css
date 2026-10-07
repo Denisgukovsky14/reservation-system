@@ -1,0 +1,106 @@
+/* --- Навигация --- */
+.header-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+header {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(11, 15, 23, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+}
+
+:root[data-theme="light"] header {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+.theme-toggle svg {
+    width: 18px;
+    height: 18px;
+    display: none;
+}
+
+.theme-toggle .icon-sun { display: block; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.logo-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.logo-icon span {
+    display: block;
+    width: 16px;
+    height: 4px;
+    background-color: var(--text-white);
+    border-radius: 2px;
+}
+
+.logo-icon span:nth-child(2) {
+    width: 12px;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: var(--accent-blue);
+}

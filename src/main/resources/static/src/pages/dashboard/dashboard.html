@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignHub — Дашборд</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon"></div> DesignHub
+            </div>
+            <nav>
+                <a href="#" class="active">Главная</a>
+                <a href="#">Проекты</a>
+                <a href="#">Команда</a>
+                <a href="#">Задачи</a>
+                <a href="#">Календарь</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-box">
+                <input type="text" placeholder="Search">
+            </div>
+            <span style="font-size: 1.2rem; cursor: pointer; opacity: 0.7;">🔔</span>
+            <img src="https://i.pravatar.cc/100?img=32" alt="Avatar" class="profile-img">
+        </div>
+    </header>
+
+    <div class="main-container">
+        <h1>Дашборд</h1>
+        <p class="subtitle">Обзор ключевых метрик платформы</p>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h4>Общее количество пользователей</h4>
+                <div class="metric-val">1,234</div>
+                <div class="trend up">▲ +12%</div>
+            </div>
+            <div class="metric-card">
+                <h4>Активные проекты</h4>
+                <div class="metric-val">567</div>
+                <div class="trend up">▲ +5%</div>
+            </div>
+            <div class="metric-card">
+                <h4>Последние запросы</h4>
+                <div class="metric-val">89</div>
+                <div class="trend down">▼ -2%</div>
+            </div>
+        </div>
+
+        <h2>Сводная аналитика</h2>
+        <div class="charts-grid">
+            <div class="chart-box">
+                <div class="chart-header">
+                    <div class="chart-title">Активность пользователей за последний месяц</div>
+                    <div class="chart-percent">+15%</div>
+                </div>
+                <div class="wave-container">
+                    <svg class="wave-svg" viewBox="0 0 400 100" preserveAspectRatio="none">
+                        <path d="M0,80 Q50,20 100,60 T200,40 T300,70 T400,30" fill="none" stroke="#3b82f6"
+                            stroke-width="3" />
+                    </svg>
+                </div>
+                <div class="week-labels">
+                    <span>Нед. 1</span><span>Нед. 2</span><span>Нед. 3</span><span>Нед. 4</span>
+                </div>
+            </div>
+
+            <div class="chart-box">
+                <div class="chart-header">
+                    <div class="chart-title">Распределение проектов по категориям</div>
+                    <div class="chart-percent">25%</div>
+                </div>
+                <div class="bars-container">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="bar-item" style="height: 40px;"></div>
+                        <span class="bar-label">Жилые</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="bar-item" style="height: 60px;"></div>
+                        <span class="bar-label">Коммерческие</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="bar-item" style="height: 35px;"></div>
+                        <span class="bar-label">Общественные</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Последние запросы</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Заказчик</th>
+                        <th>Проект</th>
+                        <th>Дата</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Елена Смирнова</td>
+                        <td>Дизайн интерьера квартиры</td>
+                        <td>2024-07-20</td>
+                        <td><span class="status new">Новый</span></td>
+                    </tr>
+                    <tr>
+                        <td>Иван Петров</td>
+                        <td>Ландшафтный дизайн участка</td>
+                        <td>2024-07-18</td>
+                        <td><span class="status working">В работе</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ольга Кузнецова</td>
+                        <td>Дизайн офисного пространства</td>
+                        <td>2024-07-15</td>
+                        <td><span class="status done">Завершен</span></td>
+                    </tr>
+                    <tr>
+                        <td>Алексей Иванов</td>
+                        <td>Дизайн ресторана</td>
+                        <td>2024-07-10</td>
+                        <td><span class="status canceled">Отменен</span></td>
+                    </tr>
+                    <tr>
+                        <td>Мария Сидорова</td>
+                        <td>Дизайн магазина</td>
+                        <td>2024-07-05</td>
+                        <td><span class="status working">В работе</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

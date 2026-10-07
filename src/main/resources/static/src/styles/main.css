@@ -1,0 +1,320 @@
+/* Базовые стили */
+@import "./base/variables.css";
+@import "./base/typography.css";
+
+/* Компоненты */
+@import "./components/buttons.css";
+@import "../components/header/header.css";
+@import "../components/footer/footer.css";
+@import "../components/pricing/pricing.css";
+
+/* Страницы */
+@import "./pages/home.css";
+
+/* Шрифты */
+
+
+/* Базовая верстка SPA контейнера */
+#app {
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "sidebar main";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+}
+
+#header { grid-area: header; }
+#sidebar { grid-area: sidebar; }
+#main-content { grid-area: main; padding: var(--space-6); overflow-y: auto; }
+
+/* Состояние, когда сайдбар не нужен (например, на лендинге или логине) */
+.no-sidebar #app {
+    grid-template-areas: "header" "main";
+    grid-template-columns: 1fr;
+}
+.no-sidebar #sidebar { display: none; }
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-profile-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.user-profile-link:hover {
+    opacity: 0.8;
+}
+
+.service-group {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.service-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.service-group h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--accent-blue);
+}
+
+.service-group ul li {
+    margin-bottom: 6px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+     background-color: #ffffff;
+}
+
+.user-name {
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+/* выпадающиее меню со сделками */
+
+/* Выпадающее меню */
+/* ========== КНОПКИ В ПРОФИЛЕ ========== */
+.actions-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.actions-bar .btn-primary,
+.actions-bar .btn-secondary,
+.actions-bar .dropdown .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.actions-bar .btn-primary {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+}
+
+.actions-bar .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.actions-bar .btn-secondary,
+.actions-bar .dropdown .btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+
+.actions-bar .btn-secondary:hover,
+.actions-bar .dropdown .btn-secondary:hover {
+    background: var(--color-surface-light);
+    border-color: var(--accent-blue);
+}
+
+/* Выпадающее меню — кнопка такого же размера */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.dropdown .btn-secondary:hover {
+    background: var(--color-surface-light);
+    border-color: var(--accent-blue);
+}
+
+.dropdown-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+
+.dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Меню выпадает вправо */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    min-width: 280px;
+    max-width: 350px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+/* Стрелочка сверху меню (опционально, для красоты) */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--border);
+}
+
+.dropdown-menu::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid var(--bg-card);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 14px 20px !important;
+    text-decoration: none;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: var(--color-surface-light);
+}
+
+.dropdown-item .deal-name {
+    font-weight: 500;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.dropdown-item .deal-contractor {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .actions-bar {
+        flex-direction: column;
+    }
+
+    .actions-bar .btn-primary,
+    .actions-bar .btn-secondary,
+    .actions-bar .dropdown .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dropdown-menu {
+        right: auto;
+        left: 0;
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* Кнопки */
+
+/* ========== ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ КНОПОК В ПРОФИЛЕ ========== */
+.actions-bar .btn-primary,
+.actions-bar .btn-secondary,
+.actions-bar .dropdown-toggle {
+    padding: 12px 28px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    min-height: 48px !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.actions-bar .btn-primary {
+    background: var(--accent-blue) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.actions-bar .btn-secondary,
+.actions-bar .dropdown-toggle {
+    background: transparent !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.actions-bar .btn-secondary:hover,
+.actions-bar .dropdown-toggle:hover {
+    background: var(--color-surface-light) !important;
+    border-color: var(--accent-blue) !important;
+}

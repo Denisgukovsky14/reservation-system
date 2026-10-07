@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>(function(){function a(){if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}a();window.addEventListener('pageshow',function(e){if(e.persisted)a();});})();</script>
+    <link href="/src/styles/main.css" rel="stylesheet" type="text/css">
+    <title>DesignHub — Личный кабинет</title>
+    <style>
+
+        /*  Стили для портфолио*/
+
+        /* ========== ПОРТФОЛИО ========== */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+    margin-top: 100px;
+}
+
+.portfolio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.portfolio-card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-4px);
+}
+
+.portfolio-card-header {
+    padding: 20px 20px 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.portfolio-project-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.portfolio-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.portfolio-status.completed {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.portfolio-details {
+    padding: 16px 20px;
+    background: var(--color-surface-light);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.portfolio-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.portfolio-detail-label {
+    color: var(--text-dim);
+}
+
+.portfolio-detail-value {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.portfolio-description {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.portfolio-description-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.portfolio-description-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+.portfolio-review-section {
+    padding: 16px 20px 20px 20px;
+    background: rgba(var(--accent-rgb), 0.03);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.portfolio-review-label {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.portfolio-review-content {
+    background: var(--color-surface-light);
+    border-radius: 12px;
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.portfolio-review-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: #fbbf24;
+}
+
+.portfolio-review-rating-value {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.portfolio-review-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.portfolio-review-comment {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.portfolio-review-date {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+
+.portfolio-review-empty {
+    background: var(--color-surface-light);
+    border-radius: 12px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+        /* Специфичные стили для страницы профиля */
+.profile-layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 40px;
+    padding: 40px 60px;
+}
+
+/* Сайдбар с вертикальным меню */
+.profile-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 30px 20px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ffffff;
+}
+
+.user-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+.user-info p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+/* Вертикальное меню */
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: 0.2s;
+    font-size: 0.95rem;
+}
+
+.profile-nav-item:hover {
+    background: var(--color-surface-light);
+    color: var(--text-main);
+}
+
+.profile-nav-item.active {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.profile-nav-icon {
+    font-size: 1.2rem;
+}
+
+/* Основной контент */
+.profile-main {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ========== ЗАГОЛОВОК + ОТЗЫВЫ ========== */
+.header-section {
+    position: relative;
+    margin-bottom: 15px;
+    min-height: 100px;
+}
+
+.header-section h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.header-section p {
+    color: var(--text-dim);
+}
+
+/* Блок отзывов — справа, абсолютно */
+.reviews-card {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 20px;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-header {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.reviews-stars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.star {
+    font-size: 20px;
+    cursor: pointer;
+    color: #cbd5e1;
+    transition: color 0.2s;
+}
+
+.star.active {
+    color: #fbbf24;
+}
+
+.star:hover {
+    color: #fbbf24;
+}
+
+.reviews-rating {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.reviews-btn {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+/* ========== КНОПКИ ========== */
+.actions-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 10px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* ========== СЕКЦИИ ========== */
+section {
+    margin-bottom: 8px;
+    padding: 30px 0 !important;
+}
+
+section h2 {
+    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+    padding: 0;
+}
+
+/* Сетка метрик */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 0;
+}
+
+.metric-card {
+    background: var(--color-surface-light);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+}
+
+.metric-value {
+    font-size: 1rem;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+/* Услуги */
+.services-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.services-list li {
+    margin-bottom: 8px;
+    color: var(--text-dim);
+    padding: 8px 12px;
+    background: var(--color-surface-light);
+    border-radius: 8px;
+}
+
+.service-group {
+    margin-bottom: 24px;
+}
+
+.service-group h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--accent-blue);
+}
+
+.service-group ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.service-group ul li {
+    margin-bottom: 8px;
+    color: var(--text-dim);
+    padding: 8px 12px;
+    background: var(--color-surface-light);
+    border-radius: 8px;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 1024px) {
+    .profile-layout {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .profile-sidebar {
+        width: 100%;
+        position: static;
+    }
+    .profile-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .profile-nav-item {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* Бейдж для уведомлений */
+.badge {
+    background: var(--accent-blue);
+    color: white;
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+}
+
+/* Список заявок */
+.requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 80px;
+}
+
+.request-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: 0.2s;
+}
+
+.request-card:hover {
+    border-color: var(--accent-blue);
+}
+
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.request-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.request-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-pending { background: #f59e0b; color: #1a1a2e; }
+.status-approved { background: #25df67; color: white; }
+.status-active { background: #22c55e; color: white; }
+.status-completed { background: #6b7280; color: white; }
+.status-cancelled { background: #ef4444; color: white; }
+
+.request-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.request-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.request-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.btn-small {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+}
+
+.btn-success {
+    background: #22c55e;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #16a34a;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+}
+
+.tab-content {
+    margin-top: 0 px;
+}
+
+.requests-section {
+    margin-bottom: 32px;
+}
+
+.requests-section h3 {
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    color: var(--accent-blue);
+}
+
+.modal-container {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border-radius: 20px;
+    padding: 32px;
+}
+
+.modal-title {
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.reviews-list-modal {
+    max-width: 680px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.reviews-list-container {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.review-item {
+    background: var(--bg-body);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.review-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.review-item-author {
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+.review-item-rating {
+    color: #fbbf24;
+}
+
+.review-item-title {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.review-item-comment {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.review-item-date {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+}
+
+
+@media (max-width: 768px) {
+    .header-section {
+        margin-bottom: 140px;
+    }
+    .reviews-card {
+        position: absolute;
+        top: auto;
+        bottom: -110px;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+    .actions-bar {
+        flex-direction: column;
+    }
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+        .settings-container {
+    max-width: 800px;
+}
+
+.settings-container h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.settings-section {
+    margin-bottom: 10px;
+}
+
+/* Форма профиля */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--accent-blue);
+}
+
+.password-field {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 35;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 1.1rem;
+}
+
+.btn-save {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-save:hover {
+    opacity: 0.9;
+}
+
+/* Переключатели (toggle) */
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.settings-row:last-child {
+    border-bottom: none;
+}
+
+.row-info h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.row-info p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.row-value {
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #374151;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-blue);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.btn-logout {
+    background: #2d3748;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+
+.btn-logout:hover {
+    background: #3d4a5e;
+}
+
+/* ========== НАСТРОЙКИ ========== */
+.settings-container {
+    max-width: 800px;
+}
+
+.settings-container h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.settings-section {
+    margin-bottom: 10px;
+}
+
+/* Форма профиля */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group select {
+    appearance: auto;
+    cursor: pointer;
+}
+
+.password-field {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.eye-icon:hover {
+    opacity: 1;
+}
+
+.btn-save {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.btn-save:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-save:active {
+    transform: translateY(0);
+}
+
+/* Переключатели (toggle) */
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.settings-row:last-child {
+    border-bottom: none;
+}
+
+.row-info h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.row-info p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+.row-value {
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #374151;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-blue);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.btn-logout {
+    background: #2d3748;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+
+.btn-logout:hover {
+    background: #3d4a5e;
+}
+
+/* Тёмная тема для select */
+select option {
+    background: var(--bg-card);
+    color: var(--text-main);
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Хедер -->
+<div id="header-placeholder"></div>
+
+<div class="profile-layout">
+    <!-- Сайдбар с вертикальным меню -->
+    <aside class="profile-sidebar">
+        <div class="user-profile">
+            <img id="profile-avatar" src="/src/images/defaultAvatar.webp" class="user-avatar" alt="Avatar">
+            <div class="user-info">
+                <h4 id="profile-name">Загрузка...</h4>
+                <p id="profile-company">Загрузка...</p>
+            </div>
+
+            <!-- Тут будут уведомления -->
+        </div>
+
+        <nav class="profile-nav">
+            <a href="#" class="profile-nav-item active" data-tab="profile">
+                <span class="profile-nav-icon"></span>
+                <span>Профиль</span>
+            </a>
+            <a href="#" class="profile-nav-item" data-tab="portfolio">
+                <span class="profile-nav-icon">️</span>
+                <span>Портфолио</span>
+            </a>
+            <a href="#" class="profile-nav-item" data-tab="requests">
+                <span class="profile-nav-icon"></span>
+                <span>Запросы<span id="requestsCount" class="requests-count"></span></span>
+            </a>
+            <a href="#" class="profile-nav-item" data-tab="settings">
+                <span class="profile-nav-icon">️</span>
+                <span>Настройки</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Основной контент -->
+    <!-- Основной контент -->
+    <main class="profile-main">
+        <div class="header-section">
+            <div>
+                <h1>Личный кабинет</h1>
+                <p id="profile-welcome">Управление профилем и проектами</p>
+            </div>
+
+            <div class="reviews-card">
+                <div class="reviews-header">
+                    <span>Моя репутация</span>
+                </div>
+                <div class="reviews-stars" id="reviews-stars">
+                    <span class="star" data-rating="1">☆</span>
+                    <span class="star" data-rating="2">☆</span>
+                    <span class="star" data-rating="3">☆</span>
+                    <span class="star" data-rating="4">☆</span>
+                    <span class="star" data-rating="5">☆</span>
+                </div>
+                <div class="reviews-rating" id="reviews-rating">
+                    <span id="average-rating">0.0</span> / 5
+                </div>
+                <button class="btn btn-primary reviews-btn" id="openReviewsBtn">Отзывы</button>
+            </div>
+        </div>
+
+        <div class="actions-bar">
+            <a href="/src/pages/workflow/project_workflow.html" class="btn btn-primary">Создать запрос</a>
+            <div class="dropdown" id="projectsDropdown">
+                <button class="btn btn-secondary dropdown-toggle" id="dropdownBtn">
+                    Мои проекты <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-loading">Загрузка...</div>
+                </div>
+            </div>
+            <label style="display: flex; align-items: center; gap: 8px; color: var(--text-dim); font-size: 0.85rem;">
+                <input type="checkbox" id="showCompletedCheckbox"> Показывать завершённые
+            </label>
+        </div>
+
+        <div id="tabContent" class="tab-content">
+            <!-- Сюда будет подгружаться контент вкладок -->
+        </div>
+
+        <div id="profileContent">
+        <!-- Контактная информация -->
+        <section>
+            <h2>Контактная информация</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Телефон</div>
+                    <div class="metric-value" id="contact-phone">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Email</div>
+                    <div class="metric-value" id="contact-email">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Адрес</div>
+                    <div class="metric-value" id="company-address">—</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Информация о компании -->
+        <section>
+            <h2>О компании</h2>
+            <div class="metric-card">
+                <div class="metric-label">Название организации</div>
+                <div class="metric-value" id="company-name">—</div>
+            </div>
+            <div class="metric-card" style="margin-top: 15px;">
+                <div class="metric-label">Описание</div>
+                <div class="metric-value" id="about-company" style="font-size: 0.95rem; font-weight: normal; line-height: 1.5;">—</div>
+            </div>
+        </section>
+
+        <!-- Услуги -->
+        <section>
+            <h2>Услуги</h2>
+            <div class="metric-card">
+                <div class="metric-label">Предоставляемые услуги</div>
+                <div id="services-list">
+                    <li>Загрузка...</li>
+                </div>
+            </div>
+        </section>
+
+        <!-- Общая информация -->
+        <section>
+            <h2>Общая информация</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Форма регистрации</div>
+                    <div class="metric-value" id="business-type">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Дата регистрации</div>
+                    <div class="metric-value" id="created-at">—</div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </main>
+</div>
+
+
+<!-- Модальное окно со списком отзывов -->
+<div id="reviewsListModal" class="modal-overlay" style="display: none;">
+    <div class="modal-container reviews-list-modal">
+        <h3 class="modal-title">Отзывы</h3>
+        <div id="reviewsListContent" class="reviews-list-container">
+            <div class="loading">Загрузка...</div>
+        </div>
+        <button id="closeReviewsModalBtn" class="btn btn-secondary">Закрыть</button>
+    </div>
+</div>
+
+<!-- Футер -->
+<div id="footer-placeholder"></div>
+
+<script src="/src/scripts/utils/apiFetch.js"></script>
+<script src="/src/scripts/utils/renderHeader.js"></script>
+<script src="/src/scripts/utils/loadComponents.js"></script>
+<script src="/src/scripts/utils/profile.js"></script>
+<script>
+    // ========== ЭЛЕМЕНТЫ ДЛЯ ВКЛАДОК ==========
+    const profileContent = document.getElementById('profileContent');
+    const tabContent = document.getElementById('tabContent');
+    const actionsBar = document.querySelector('.actions-bar');
+    const user = JSON.parse(localStorage.getItem('user'));
+
+
+    const reviewsContent = document.getElementById('reviewsListContent');
+
+    // ========== ПРОВЕРКА НАДЁЖНОСТИ ПАРОЛЯ (дублируем здесь) ==========
+    function checkPasswordStrength(password) {
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (password.match(/[a-z]/)) score++;
+        if (password.match(/[A-Z]/)) score++;
+        if (password.match(/[0-9]/)) score++;
+        if (password.match(/[^a-zA-Z0-9]/)) score++;
+        return score;
+    }
+
+
+
+    function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+    }
+
+    // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+    function getStatusText(status) {
+        const map = {
+            'PENDING': 'Ожидает',
+            'APPROVED': 'Подтверждена',
+            'ACTIVE': 'В работе',
+            'COMPLETED': 'Завершена',
+            'CANCELED': 'Отменена'
+        };
+        return map[status] || status;
+    }
+
+    // ========== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ==========
+    function loadTab(tabName) {
+        // Скрываем/показываем контейнеры
+        if (profileContent) profileContent.style.display = 'none';
+        if (tabContent) tabContent.style.display = 'none';
+        if (actionsBar) actionsBar.style.display = 'none';
+
+        if (tabName === 'settings') {
+            if (tabContent) {
+                tabContent.style.display = 'block';
+                loadSettingsTab();
+            }
+            return;
+        }
+
+        if (tabName === 'profile') {
+            if (profileContent) profileContent.style.display = 'block';
+            if (actionsBar) actionsBar.style.display = 'flex';
+            return;
+        }
+
+        if (tabName === 'portfolio') {
+            if (tabContent) {
+                tabContent.style.display = 'block';
+                loadPortfolio();
+            }
+            return;
+        }
+
+        if (tabName === 'requests') {
+            if (tabContent) {
+                tabContent.style.display = 'block';
+                loadRequestsTab();
+            }
+        }
+    }
+
+
+    // ========== МОДАЛЬНОЕ ОКНО ОТЗЫВОВ ============
+
+    async function openReviewsModal() {
+    const modal = document.getElementById('reviewsListModal');
+    if (!modal) return;
+
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (!currentUser || !currentUser.id) return;
+
+    modal.style.display = 'flex';
+    const content = document.getElementById('reviewsListContent');
+    content.innerHTML = '<div class="loading">Загрузка отзывов...</div>';
+
+    try {
+        const response = await apiFetch(`/api/reviews/user/${currentUser.id}?userType=${currentUser.userType}`);
+        const reviews = await response.json();
+
+        if (reviews.length === 0) {
+            content.innerHTML = '<div class="empty-state">Пока нет отзывов</div>';
+            return;
+        }
+
+        // Загружаем имена АВТОРОВ отзывов
+        const reviewsWithNames = [];
+        for (const review of reviews) {
+            let authorName = 'Пользователь';
+
+            try {
+                if (review.receiverType === 'customer') {
+                    // Отзыв адресован заказчику → автор — подрядчик
+                    const res = await apiFetch(`/api/contractors/${review.contractorId}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        authorName = data.companyName || `${data.firstName} ${data.lastName}`;
+                    }
+                } else if (review.receiverType === 'contractor') {
+                    // Отзыв адресован подрядчику → автор — заказчик
+                    const res = await apiFetch(`/api/customers/${review.customerId}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        authorName = `${data.name} ${data.surname}`;
+                    }
+                }
+            } catch(e) {
+                console.error('Ошибка загрузки автора отзыва:', e);
+            }
+
+            reviewsWithNames.push({ ...review, authorName });
+        }
+
+        content.innerHTML = reviewsWithNames.map(review => `
+            <div class="review-item">
+                <div class="review-item-header">
+                    <span class="review-item-author">${escapeHtml(review.authorName)}</span>
+                    <span class="review-item-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+                </div>
+                <div class="review-item-title">${escapeHtml(review.title)}</div>
+                <div class="review-item-comment">${escapeHtml(review.comment)}</div>
+                <div class="review-item-date">${new Date(review.createdAt).toLocaleDateString('ru-RU')}</div>
+            </div>
+        `).join('');
+
+    } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+        content.innerHTML = '<div class="empty-state">Ошибка загрузки</div>';
+    }
+}
+
+    // ============= ЗАГРУЗКА РЕЙТИНГА НА КАРТОЧКУ ЗАЯВКИ =========
+
+    // Получение среднего рейтинга пользователя
+    async function getUserRating(userId, userType) {
+        try {
+            const response = await apiFetch(`/api/reviews/average/${userId}?userType=${userType}`);
+            if (!response.ok) return 0;
+            const data = await response.json();
+            return data.average || 0;
+        } catch (error) {
+            console.error('Ошибка загрузки рейтинга:', error);
+            return 0;
+        }
+    }
+
+    // Обработка кнопки настроек
+
+function loadSettingsTab() {
+    if (!tabContent) return;
+
+    // Показываем загрузку
+    tabContent.innerHTML = '<div class="loading">Загрузка настроек...</div>';
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.id) {
+        tabContent.innerHTML = '<div class="empty-state">Ошибка: пользователь не авторизован</div>';
+        return;
+    }
+
+    const type = user.userType;
+    const id = user.id;
+
+    apiFetch(`/api/profile/${type}/${id}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Ошибка загрузки профиля');
+            return response.json();
+        })
+        .then(profile => {
+             console.log('Проверка companyName:', profile.companyName);
+             console.log('Весь профиль:', profile);
+            // Рендерим форму с подставленными значениями
+            tabContent.innerHTML = `
+                <div class="settings-container">
+                    <section class="settings-section">
+                        <h2>Профиль</h2>
+
+                        <div class="form-group">
+                            <label>Имя</label>
+                            <input type="text" id="settings-name" value="${escapeHtml(profile.firstName || profile.name || '')}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Фамилия</label>
+                            <input type="text" id="settings-surname" value="${escapeHtml(profile.lastName || profile.surname || '')}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Электронная почта</label>
+                            <input type="email" id="settings-email" value="${escapeHtml(profile.email || '')}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Номер телефона</label>
+                            <input type="tel" id="settings-phone" value="${escapeHtml(profile.phone || '')}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Адрес</label>
+                            <input type="text" id="settings-address" value="${escapeHtml(profile.address || '')}">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Название организации</label>
+                            <input type="text" id="settings-company" value='${profile.companyName || ""}'>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Форма регистрации бизнеса</label>
+                            <select id="settings-business">
+                                <option value="ИП" ${profile.businessType === 'ИП' ? 'selected' : ''}>ИП</option>
+                                <option value="ООО" ${profile.businessType === 'ООО' ? 'selected' : ''}>ООО</option>
+                                <option value="АО" ${profile.businessType === 'АО' ? 'selected' : ''}>АО</option>
+                                <option value="ПАО" ${profile.businessType === 'ПАО' ? 'selected' : ''}>ПАО</option>
+                                <option value="Самозанятый" ${profile.businessType === 'Самозанятый' ? 'selected' : ''}>Самозанятый</option>
+                                <option value="Отсутствует" ${profile.businessType === 'Отсутствует' || !profile.businessType ? 'selected' : ''}>Отсутствует</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Описание</label>
+                            <textarea id="settings-about" rows="3">${escapeHtml(profile.about || profile.aboutCompany || '')}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <div class="password-field">
+                                <input type="password" id="settings-password" placeholder="Оставьте пустым, если не хотите менять">
+                                <span class="eye-icon" id="togglePassword">👁</span>
+                                <span class="error-message" id="settings-password-error" style="display: none;">Пароль должен быть не менее 8 символов, содержать заглавную букву, цифру и спецсимвол</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-save" id="saveProfileBtn">Сохранить изменения</button>
+                    </section>
+
+                    <section class="settings-section">
+                        <h2>Уведомления</h2>
+                        <div class="settings-row">
+                            <div class="row-info">
+                                <h4>Уведомления по электронной почте</h4>
+                                <p>Получайте уведомления о новых сообщениях и проектах.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-row">
+                            <div class="row-info">
+                                <h4>Push-уведомления</h4>
+                                <p>Получайте мгновенные уведомления на устройство.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h2>Общие настройки</h2>
+                        <div class="settings-row">
+                            <div class="row-info">
+                                <h4>Язык</h4>
+                                <p>Измените язык интерфейса.</p>
+                            </div>
+                            <div class="row-value">Русский</div>
+                        </div>
+                        <div class="settings-row">
+                            <div class="row-info">
+                                <h4>Тема</h4>
+                                <p>Выберите между светлой и тёмной темой.</p>
+                            </div>
+                            <div class="row-value">Тёмная</div>
+                        </div>
+                        <button class="btn-logout" id="logoutBtn">Выйти из аккаунта</button>
+                    </section>
+                </div>
+            `;
+
+            // ====== ОБРАБОТЧИКИ ======
+
+            // Переключение видимости пароля
+            const toggleBtn = document.getElementById('togglePassword');
+            const passInput = document.getElementById('settings-password');
+            if (toggleBtn && passInput) {
+                toggleBtn.addEventListener('click', () => {
+                    const isPass = passInput.type === 'password';
+                    passInput.type = isPass ? 'text' : 'password';
+                    toggleBtn.textContent = isPass ? '—' : '👁';
+                });
+            }
+
+            // Сохранение профиля
+            document.getElementById('saveProfileBtn')?.addEventListener('click', saveProfile);
+
+            // Выход
+            document.getElementById('logoutBtn')?.addEventListener('click', () => {
+                    localStorage.removeItem('user');
+                    window.location.href = '/src/pages/home/home.html';
+            });
+        })
+        .catch(error => {
+            console.error('Ошибка загрузки профиля:', error);
+            tabContent.innerHTML = '<div class="empty-state">Ошибка загрузки настроек. Попробуйте позже.</div>';
+        });
+}
+
+// ====== ФУНКЦИЯ СОХРАНЕНИЯ ======
+// ====== ФУНКЦИЯ СОХРАНЕНИЯ ======
+async function saveProfile() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+        alert('Ошибка: пользователь не авторизован');
+        return;
+    }
+
+    const type = user.userType;
+    const newPassword = document.getElementById('settings-password')?.value?.trim() || '';
+    const errorSpan = document.getElementById('settings-password-error');
+
+    // === Скрываем старую ошибку ===
+    if (errorSpan) errorSpan.style.display = 'none';
+
+    // === ВАЛИДАЦИЯ ПАРОЛЯ ===
+    if (newPassword.length > 0) {
+        let isValid = true;
+        let errorMsg = '';
+
+        if (newPassword.length < 8) {
+            isValid = false;
+            errorMsg = 'Пароль должен содержать не менее 8 символов';
+        } else if (!/[a-z]/.test(newPassword)) {
+            isValid = false;
+            errorMsg = 'Пароль должен содержать строчную букву';
+        } else if (!/[A-Z]/.test(newPassword)) {
+            isValid = false;
+            errorMsg = 'Пароль должен содержать заглавную букву';
+        } else if (!/[0-9]/.test(newPassword)) {
+            isValid = false;
+            errorMsg = 'Пароль должен содержать цифру';
+        } else if (!/[^a-zA-Z0-9]/.test(newPassword)) {
+            isValid = false;
+            errorMsg = 'Пароль должен содержать спецсимвол';
+        }
+
+        if (!isValid) {
+            if (errorSpan) {
+                errorSpan.textContent = errorMsg;
+                errorSpan.style.display = 'block';
+            }
+            document.getElementById('settings-password').focus();
+            return;
+        }
+    }
+
+    // === СБОР ДАННЫХ ===
+    const payload = {
+        id: user.id,
+        firstName: document.getElementById('settings-name')?.value?.trim() || '',
+        lastName: document.getElementById('settings-surname')?.value?.trim() || '',
+        email: document.getElementById('settings-email')?.value?.trim() || '',
+        phone: document.getElementById('settings-phone')?.value?.trim() || '',
+        address: document.getElementById('settings-address')?.value?.trim() || '',
+        companyName: document.getElementById('settings-company')?.value?.trim() || '',
+        businessType: document.getElementById('settings-business')?.value || 'Отсутствует',
+        about: document.getElementById('settings-about')?.value?.trim() || '',
+    };
+
+    if (newPassword.length >= 8) {
+        payload.password = newPassword;
+    }
+
+    try {
+        const response = await apiFetch(`/api/profile/update?type=${type}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            alert('Профиль успешно обновлён');
+            const updatedUser = { ...user, ...payload };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            window.location.reload();
+        } else {
+            const error = await response.json();
+            alert('Ошибка: ' + (error.message || 'Не удалось обновить профиль'));
+        }
+    } catch (error) {
+        alert('Ошибка соединения с сервером. Попробуйте позже.');
+    }
+}
+
+    // Отображение звёзд рейтинга
+    function renderRatingStars(rating) {
+        const fullStars = Math.round(rating);
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            starsHtml += i <= fullStars ? '★' : '☆';
+        }
+        return starsHtml;
+    }
+
+    // ========== ЗАГРУЗКА ВКЛАДКИ "ЗАПРОСЫ" ==========
+    async function loadRequestsTab() {
+        if (!tabContent) return;
+
+        tabContent.innerHTML = '<div class="loading">Загрузка...</div>';
+
+        try {
+            if (user.userType === 'customer') {
+                // ЗАКАЗЧИК: видит свои заявки
+                const response = await apiFetch(`/api/deals/customer/${user.id}`);
+                const deals = await response.json();
+
+                if (deals.length === 0) {
+                    tabContent.innerHTML = '<div class="empty-state">У вас пока нет заявок</div>';
+                    return;
+                }
+
+                tabContent.innerHTML = `
+                    <div class="requests-list">
+                        ${deals.map(deal => `
+                            <div class="request-card">
+                                <div class="request-header">
+                                    <span class="request-title">${deal.projectName || 'Без названия'}</span>
+                                    <span class="request-status status-${deal.status.toLowerCase()}">${getStatusText(deal.status)}</span>
+                                </div>
+                                <div class="request-details">
+                                    <div class="request-detail-item">Бюджет: ${deal.price ? deal.price.toLocaleString() + ' ₽' : '—'}</div>
+                                    <div class="request-detail-item">Дедлайн: ${deal.endDate || '—'}</div>
+                                    <div class="request-detail-item">Подрядчик: ${deal.contractorId ? 'Выбран' : 'Не выбран'}</div>
+                                </div>
+                                ${deal.status === 'PENDING' && !deal.contractorId ?
+                                    `<div class="request-actions">
+                                        <button class="btn btn-small btn-primary" onclick="window.location.href='/src/pages/catalog/catalog.html'">Найти подрядчика</button>
+                                        <button class="btn btn-small btn-danger" onclick="cancelDeal(${deal.id})">Удалить</button>
+                                    </div>` :
+                                    deal.status === 'PENDING' && deal.contractorId ?
+                                    `<div class="request-actions">
+                                        <button class="btn btn-small btn-danger" onclick="cancelDeal(${deal.id})">Удалить</button>
+                                    </div>` : ''
+                                }
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            else if (user.userType === 'contractor') {
+    const response = await apiFetch(`/api/deals/contractor/${user.id}`);
+    const allDeals = await response.json();
+
+    // Разделяем сделки по статусам
+    const pendingDeals = allDeals.filter(d => d.status === 'PENDING');
+    const approvedDeals = allDeals.filter(d => d.status === 'APPROVED');
+    const completedDeals = allDeals.filter(d => d.status === 'COMPLETED');
+
+    // Обновляем бейдж (количество новых заявок)
+    const requestsSpan = document.getElementById('requestsCount');
+    if (requestsSpan) {
+        if (pendingDeals.length > 0) {
+            requestsSpan.textContent = `(${pendingDeals.length})`;
+        } else {
+            requestsSpan.textContent = '';
+        }
+    }
+
+    if (pendingDeals.length === 0 && approvedDeals.length === 0 && completedDeals.length === 0) {
+        tabContent.innerHTML = '<div class="empty-state">Нет входящих заявок</div>';
+        return;
+    }
+
+    let html = '';
+
+    // ========== НОВЫЕ ЗАЯВКИ (PENDING) ==========
+    if (pendingDeals.length > 0) {
+        html += `<div class="requests-section"><h3>Новые заявки (${pendingDeals.length})</h3><div class="requests-list">`;
+
+        for (const deal of pendingDeals) {
+            let customerInfo = { name: 'Загрузка...', surname: '', companyName: '' };
+            try {
+                const custRes = await apiFetch(`/api/customers/${deal.customerId}`);
+                if (custRes.ok) customerInfo = await custRes.json();
+            } catch(e) {}
+
+            let customerRating = 0;
+            try {
+                const ratingRes = await apiFetch(`/api/reviews/average/${deal.customerId}?userType=customer`);
+                if (ratingRes.ok) {
+                    const ratingData = await ratingRes.json();
+                    customerRating = ratingData.average || 0;
+                }
+            } catch(e) {}
+            const ratingStars = '★'.repeat(Math.round(customerRating)) + '☆'.repeat(5 - Math.round(customerRating));
+
+            html += `
+                <div class="request-card">
+                    <div class="request-header">
+                        <span class="request-title">${escapeHtml(deal.projectName || 'Без названия')}</span>
+                        <span class="request-status status-pending">Новая</span>
+                    </div>
+                    <div class="request-details">
+                        <div class="request-detail-item">Заказчик: ${customerInfo.name} ${customerInfo.surname}</div>
+                        <div class="request-detail-item">
+                            <span style="cursor: pointer; text-decoration: underline; color: var(--accent-blue);"
+                                  onclick="openContractorReviewsModal(${deal.customerId}, 'customer', '${escapeHtml(customerInfo.name + ' ' + customerInfo.surname)}')">
+                                Рейтинг
+                            </span>: ${ratingStars} (${customerRating.toFixed(1)})
+                        </div>
+                        <div class="request-detail-item">Компания: ${customerInfo.companyName || 'Частное лицо'}</div>
+                        <div class="request-detail-item">Бюджет: ${deal.price ? deal.price.toLocaleString() + ' ₽' : '—'}</div>
+                        <div class="request-detail-item">Дедлайн: ${deal.endDate || '—'}</div>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-small btn-success" onclick="approveDeal(${deal.id})">✓ Принять</button>
+                        <button class="btn btn-small btn-danger" onclick="rejectDeal(${deal.id})">✗ Отклонить</button>
+                    </div>
+                </div>
+            `;
+        }
+        html += `</div></div>`;
+    }
+
+    // ========== ПОДТВЕРЖДЁННЫЕ ЗАЯВКИ (APPROVED) ==========
+    if (approvedDeals.length > 0) {
+        html += `<div class="requests-section"><h3>Подтверждённые заявки</h3><div class="requests-list">`;
+
+        for (const deal of approvedDeals) {
+            let customerInfo = { name: 'Загрузка...', surname: '' };
+            try {
+                const custRes = await apiFetch(`/api/customers/${deal.customerId}`);
+                if (custRes.ok) customerInfo = await custRes.json();
+            } catch(e) {}
+
+            let customerRating = 0;
+            try {
+                const ratingRes = await apiFetch(`/api/reviews/average/${deal.customerId}?userType=customer`);
+                if (ratingRes.ok) {
+                    const ratingData = await ratingRes.json();
+                    customerRating = ratingData.average || 0;
+                }
+            } catch(e) {}
+            const ratingStars = '★'.repeat(Math.round(customerRating)) + '☆'.repeat(5 - Math.round(customerRating));
+
+            html += `
+                <div class="request-card">
+                    <div class="request-header">
+                        <span class="request-title">${escapeHtml(deal.projectName || 'Без названия')}</span>
+                        <span class="request-status status-approved">Подтверждена</span>
+                    </div>
+                    <div class="request-details">
+                        <div class="request-detail-item">Заказчик: ${customerInfo.name} ${customerInfo.surname}</div>
+                        <div class="request-detail-item">
+                            <span style="cursor: pointer; text-decoration: underline; color: var(--accent-blue);"
+                                  onclick="openContractorReviewsModal(${deal.customerId}, 'customer', '${escapeHtml(customerInfo.name + ' ' + customerInfo.surname)}')">
+                                Рейтинг
+                            </span>: ${ratingStars} (${customerRating.toFixed(1)})
+                        </div>
+                        <div class="request-detail-item">Бюджет: ${deal.price ? deal.price.toLocaleString() + ' ₽' : '—'}</div>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-small btn-primary" onclick="goToDeal(${deal.id}, ${deal.contractorId})">Перейти к сделке</button>
+                    </div>
+                </div>
+            `;
+        }
+        html += `</div></div>`;
+    }
+
+    // ========== ЗАВЕРШЁННЫЕ ПРОЕКТЫ (COMPLETED) ==========
+    if (completedDeals.length > 0) {
+        html += `<div class="requests-section"><h3>Завершённые проекты</h3><div class="requests-list">`;
+
+        for (const deal of completedDeals) {
+            let customerInfo = { name: 'Загрузка...', surname: '' };
+            try {
+                const custRes = await apiFetch(`/api/customers/${deal.customerId}`);
+                if (custRes.ok) customerInfo = await custRes.json();
+            } catch(e) {}
+
+            let customerRating = 0;
+            try {
+                const ratingRes = await apiFetch(`/api/reviews/average/${deal.customerId}?userType=customer`);
+                if (ratingRes.ok) {
+                    const ratingData = await ratingRes.json();
+                    customerRating = ratingData.average || 0;
+                }
+            } catch(e) {}
+            const ratingStars = '★'.repeat(Math.round(customerRating)) + '☆'.repeat(5 - Math.round(customerRating));
+
+            html += `
+                <div class="request-card">
+                    <div class="request-header">
+                        <span class="request-title">${escapeHtml(deal.projectName || 'Без названия')}</span>
+                        <span class="request-status status-completed">Завершён</span>
+                    </div>
+                    <div class="request-details">
+                        <div class="request-detail-item">Заказчик: ${customerInfo.name} ${customerInfo.surname}</div>
+                        <div class="request-detail-item">
+                            <span style="cursor: pointer; text-decoration: underline; color: var(--accent-blue);"
+                                  onclick="openContractorReviewsModal(${deal.customerId}, 'customer', '${escapeHtml(customerInfo.name + ' ' + customerInfo.surname)}')">
+                                Рейтинг
+                            </span>: ${ratingStars} (${customerRating.toFixed(1)})
+                        </div>
+                        <div class="request-detail-item">Бюджет: ${deal.price ? deal.price.toLocaleString() + ' ₽' : '—'}</div>
+                        <div class="request-detail-item">Завершена: ${deal.endDate ? new Date(deal.endDate).toLocaleDateString('ru-RU') : '—'}</div>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn btn-small btn-primary" onclick="goToDeal(${deal.id}, ${deal.contractorId})">Просмотр</button>
+                    </div>
+                </div>
+            `;
+        }
+        html += `</div></div>`;
+    }
+
+    tabContent.innerHTML = html;
+}
+
+        } catch (error) {
+            console.error('Ошибка загрузки заявок:', error);
+            tabContent.innerHTML = '<div class="empty-state">Ошибка загрузки</div>';
+        }
+    }
+
+    // ========== ПОРТФОЛИО (ЗАВЕРШЁННЫЕ СДЕЛКИ С ОТЗЫВАМИ) ==========
+
+
+// ========== ПОРТФОЛИО (ЗАВЕРШЁННЫЕ СДЕЛКИ С ОТЗЫВАМИ) ==========
+async function loadPortfolio() {
+    if (!tabContent) return;
+
+    tabContent.innerHTML = '<div class="loading">Загрузка портфолио...</div>';
+
+    try {
+        let deals = [];
+        if (user.userType === 'customer') {
+            const response = await apiFetch(`/api/deals/customer/${user.id}`);
+            const allDeals = await response.json();
+            deals = allDeals.filter(deal => deal.status === 'COMPLETED');
+        } else if (user.userType === 'contractor') {
+            const response = await apiFetch(`/api/deals/contractor/${user.id}`);
+            const allDeals = await response.json();
+            deals = allDeals.filter(deal => deal.status === 'COMPLETED');
+        }
+
+        if (deals.length === 0) {
+            tabContent.innerHTML = `
+                <div class="empty-state">
+                    <div style="font-size: 48px; margin-bottom: 16px;"></div>
+                    <h3>Нет завершённых сделок</h3>
+                    <p style="color: var(--text-dim);">Завершённые проекты появятся здесь после успешного выполнения работ</p>
+                </div>
+            `;
+            return;
+        }
+
+        let portfolioHtml = '<div class="portfolio-grid">';
+
+        for (const deal of deals) {
+            const counterpartyId = user.userType === 'customer' ? deal.contractorId : deal.customerId;
+
+            // ========== ОТЗЫВ, КОТОРЫЙ НАПИСАЛ Я (о контрагенте) ==========
+            let myReview = null;
+            try {
+                // Ищем среди отзывов, где я — отправитель, а получатель — контрагент
+                const reviewsResponse = await apiFetch(`/api/reviews/user/${user.id}?userType=${user.userType}`);
+                const reviews = await reviewsResponse.json();
+                myReview = reviews.find(r => r.dealId === deal.id);
+            } catch (e) {
+                console.error('Ошибка загрузки моего отзыва:', e);
+            }
+
+            // ========== ОТЗЫВ, КОТОРЫЙ НАПИСАЛ КОНТРАГЕНТ (обо мне) ==========
+            let reviewAboutMe = null;
+            try {
+                // Ищем среди отзывов контрагента, где он — отправитель, а получатель — я
+                const counterpartyUserType = user.userType === 'customer' ? 'contractor' : 'customer';
+                const reviewsResponse = await apiFetch(`/api/reviews/user/${counterpartyId}?userType=${counterpartyUserType}`);
+                const reviews = await reviewsResponse.json();
+                reviewAboutMe = reviews.find(r => r.dealId === deal.id);
+            } catch (e) {
+                console.error('Ошибка загрузки отзыва обо мне:', e);
+            }
+
+            // Получаем информацию о контрагенте
+            let counterpartyName = 'Контрагент';
+            try {
+                let counterpartyUrl;
+                if (user.userType === 'customer') {
+                    counterpartyUrl = `/api/contractors/${deal.contractorId}`;
+                } else {
+                    counterpartyUrl = `/api/customers/${deal.customerId}`;
+                }
+                const cpResponse = await apiFetch(counterpartyUrl);
+                const cpData = await cpResponse.json();
+                if (user.userType === 'customer') {
+                    counterpartyName = cpData.companyName || `${cpData.firstName} ${cpData.lastName}`;
+                } else {
+                    counterpartyName = `${cpData.name} ${cpData.surname}`;
+                }
+            } catch (e) {
+                console.error('Ошибка загрузки контрагента:', e);
+            }
+
+            portfolioHtml += `
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <h3 class="portfolio-project-name">${escapeHtml(deal.projectName || 'Без названия')}</h3>
+                        <span class="portfolio-status completed">✓ Завершён</span>
+                    </div>
+
+                    <div class="portfolio-details">
+                        <div class="portfolio-detail">
+                            <span class="portfolio-detail-label">Дата завершения:</span>
+                            <span class="portfolio-detail-value">${deal.endDate ? new Date(deal.endDate).toLocaleDateString('ru-RU') : '—'}</span>
+                        </div>
+                        <div class="portfolio-detail">
+                            <span class="portfolio-detail-label">Бюджет:</span>
+                            <span class="portfolio-detail-value">${deal.price ? deal.price.toLocaleString() + ' ₽' : '—'}</span>
+                        </div>
+                        <div class="portfolio-detail">
+                            <span class="portfolio-detail-label">${user.userType === 'customer' ? 'Исполнитель:' : 'Заказчик:'}</span>
+                            <span class="portfolio-detail-value">${escapeHtml(counterpartyName)}</span>
+                        </div>
+                    </div>
+
+                    ${deal.description ? `
+                    <div class="portfolio-description">
+                        <div class="portfolio-description-label">Описание проекта:</div>
+                        <div class="portfolio-description-text">${escapeHtml(deal.description.substring(0, 200))}${deal.description.length > 200 ? '...' : ''}</div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Отзыв контрагента обо мне (СНАЧАЛА) -->
+                        <div class="portfolio-review-section">
+
+                            <div class="portfolio-review-label">Мой отзыв ${user.userType === 'customer' ? 'об исполнителе' : 'о заказчике'}</div>
+                            ${reviewAboutMe ? `
+                                <div class="portfolio-review-content">
+                                    <div class="portfolio-review-rating">
+                                        ${'★'.repeat(reviewAboutMe.rating)}${'☆'.repeat(5 - reviewAboutMe.rating)}
+                                        <span class="portfolio-review-rating-value">${reviewAboutMe.rating}.0</span>
+                                    </div>
+                                    <div class="portfolio-review-title">${escapeHtml(reviewAboutMe.title)}</div>
+                                    <div class="portfolio-review-comment">${escapeHtml(reviewAboutMe.comment)}</div>
+                                    <div class="portfolio-review-date">${new Date(reviewAboutMe.createdAt).toLocaleDateString('ru-RU')}</div>
+                                </div>
+                            ` : `
+                                <div class="portfolio-review-empty">
+                                    <span>Отзыв пока не оставлен</span>
+                                </div>
+                            `}
+                        </div>
+
+                        <!-- Мой отзыв о контрагенте (ПОТОМ) -->
+                        <div class="portfolio-review-section">
+                            <div class="portfolio-review-label">Отзыв ${user.userType === 'customer' ? 'исполнителя' : 'заказчика'} обо мне</div>
+                            ${myReview ? `
+                                <div class="portfolio-review-content">
+                                    <div class="portfolio-review-rating">
+                                        ${'★'.repeat(myReview.rating)}${'☆'.repeat(5 - myReview.rating)}
+                                        <span class="portfolio-review-rating-value">${myReview.rating}.0</span>
+                                    </div>
+                                    <div class="portfolio-review-title">${escapeHtml(myReview.title)}</div>
+                                    <div class="portfolio-review-comment">${escapeHtml(myReview.comment)}</div>
+                                    <div class="portfolio-review-date">${new Date(myReview.createdAt).toLocaleDateString('ru-RU')}</div>
+                                </div>
+                            ` : `
+                                <div class="portfolio-review-empty">
+                                    <span>Отзыв пока не оставлен</span>
+                                </div>
+                            `}
+                        </div>
+                </div>
+            `;
+        }
+
+        portfolioHtml += '</div>';
+        tabContent.innerHTML = portfolioHtml;
+
+    } catch (error) {
+        console.error('Ошибка загрузки портфолио:', error);
+        tabContent.innerHTML = '<div class="empty-state">Ошибка загрузки портфолио</div>';
+    }
+}
+
+    // ========== ДЕЙСТВИЯ С ЗАЯВКАМИ ==========
+
+    async function cancelDeal(dealId) {
+        if (!confirm('Удалить эту заявку?')) return;
+        try {
+            const response = await apiFetch(`/api/deals/${dealId}/cancel`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            if (data.success) {
+                //alert('Заявка удалена');
+                loadRequestsTab();
+            } else {
+                alert('Ошибка: ' + data.message);
+            }
+        } catch (error) {
+            alert('Ошибка соединения');
+        }
+    }
+
+    async function approveDeal(dealId) {
+        if (!confirm('Принять заявку?')) return;
+        try {
+            const response = await apiFetch(`/api/deals/${dealId}/approve`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            if (data.success) {
+                //alert('Заявка принята!');
+                loadRequestsTab();
+                updateRequestsBadge();
+            } else {
+                alert('Ошибка: ' + data.message);
+            }
+        } catch (error) {
+            alert('Ошибка соединения');
+        }
+    }
+
+    async function rejectDeal(dealId) {
+        if (!confirm('Отклонить заявку?')) return;
+        try {
+            const response = await apiFetch(`/api/deals/${dealId}/reject`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            if (data.success) {
+                //alert('Заявка отклонена');
+                loadRequestsTab();
+                updateRequestsBadge();
+            } else {
+                alert('Ошибка: ' + data.message);
+            }
+        } catch (error) {
+            alert('Ошибка соединения');
+        }
+    }
+
+    function goToDeal(dealId, contractorId) {
+        window.location.href = `/src/pages/workflow/project_workflow_step_two.html?dealId=${dealId}&contractorId=${contractorId}&userType=contractor`;
+    }
+
+    async function updateRequestsBadge() {
+    const requestsSpan = document.getElementById('requestsCount');
+    if (!requestsSpan || user.userType !== 'contractor') return;
+
+    try {
+        const response = await apiFetch(`/api/deals/contractor/${user.id}`);
+        const deals = await response.json();
+        const pendingCount = deals.filter(d => d.status === 'PENDING').length;
+
+        if (pendingCount > 0) {
+            requestsSpan.textContent = `(${pendingCount})`;
+        } else {
+            requestsSpan.textContent = '';
+        }
+    } catch (error) {
+        console.error('Ошибка обновления счётчика:', error);
+    }
+}
+
+    // ========== ОБРАБОТЧИКИ ВКЛАДОК ==========
+    const tabs = document.querySelectorAll('.profile-nav-item');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const tabName = tab.getAttribute('data-tab');
+            loadTab(tabName);
+            if (tabName === 'requests' && user.userType === 'contractor') {
+                updateRequestsBadge();
+            }
+        });
+    });
+
+    // ========== ВЫПАДАЮЩЕЕ МЕНЮ "МОИ ПРОЕКТЫ" ==========
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    const dropdown = document.getElementById('projectsDropdown');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    if (dropdownBtn) {
+        dropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+            if (!dropdown.hasAttribute('data-loaded')) {
+                loadActiveDeals();
+                dropdown.setAttribute('data-loaded', 'true');
+            }
+        });
+    }
+
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('open');
+    });
+
+    async function loadActiveDeals() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const showCompleted = document.getElementById('showCompletedCheckbox')?.checked || false;
+
+    if (!user || !user.id) {
+        dropdownMenu.innerHTML = '<div class="dropdown-empty">Авторизуйтесь для просмотра</div>';
+        return;
+    }
+    dropdownMenu.innerHTML = '<div class="dropdown-loading">Загрузка проектов...</div>';
+    try {
+        let deals = [];
+        if (user.userType === 'customer') {
+            const response = await apiFetch(`/api/deals/customer/${user.id}`);
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            deals = await response.json();
+
+            // Логика фильтрации с учётом чекбокса
+            deals = deals.filter(deal => {
+                const hasContractor = deal.contractorId !== null && deal.contractorId !== undefined;
+                if (showCompleted) {
+                    // Показываем все кроме PENDING (завершённые тоже показываем)
+                    return deal.status !== 'PENDING' && hasContractor;
+                } else {
+                    // Показываем только активные (не завершённые)
+                    return deal.status !== 'PENDING' && deal.status !== 'COMPLETED' && deal.status !== 'CANCELED' && hasContractor;
+                }
+            });
+        } else if (user.userType === 'contractor') {
+            const response = await apiFetch(`/api/deals/contractor/${user.id}`);
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            deals = await response.json();
+
+            // Логика фильтрации для подрядчика
+            if (showCompleted) {
+                deals = deals.filter(deal => deal.status === 'PENDING' || deal.status === 'APPROVED' || deal.status === 'COMPLETED');
+            } else {
+                deals = deals.filter(deal => deal.status === 'PENDING' || deal.status === 'APPROVED');
+            }
+        }
+
+        if (deals.length === 0) {
+        dropdownMenu.innerHTML = '';
+        dropdownMenu.style.display = 'none';
+        return;
+        } else {
+            dropdownMenu.style.display = '';
+        }
+
+        dropdownMenu.innerHTML = '';
+        for (const deal of deals) {
+            let counterpartyName = '';
+            if (user.userType === 'customer') {
+                try {
+                    const res = await apiFetch(`/api/contractors/${deal.contractorId}`);
+                    if (res.ok) {
+                        const contractor = await res.json();
+                        counterpartyName = contractor.companyName || `${contractor.firstName} ${contractor.lastName}`;
+                    }
+                } catch (e) {
+                    counterpartyName = 'Подрядчик';
+                }
+            } else if (user.userType === 'contractor') {
+                try {
+                    const res = await apiFetch(`/api/customers/${deal.customerId}`);
+                    if (res.ok) {
+                        const customer = await res.json();
+                        counterpartyName = `${customer.name} ${customer.surname}`;
+                    }
+                } catch (e) {
+                    counterpartyName = 'Заказчик';
+                }
+            }
+            const dealItem = document.createElement('div');
+            dealItem.className = 'dropdown-item';
+            // Добавляем статус для завершённых проектов
+            const statusBadge = deal.status === 'COMPLETED' ? '<span style="color: #22c55e; font-size: 0.7rem; margin-left: 8px;">✓ Завершён</span>' : '';
+            dealItem.innerHTML = `<div class="deal-name">${deal.projectName || 'Без названия'}${statusBadge}</div><div class="deal-contractor">${counterpartyName}</div>`;
+            dealItem.addEventListener('click', () => {
+                let displayContractorId = null, displayCustomerId = null;
+                if (user.userType === 'customer') {
+                    displayContractorId = deal.contractorId;
+                    displayCustomerId = user.id;
+                } else {
+                    displayContractorId = user.id;
+                    displayCustomerId = deal.customerId;
+                }
+                window.location.href = `/src/pages/workflow/project_workflow_step_two.html?dealId=${deal.id}&contractorId=${displayContractorId}&customerId=${displayCustomerId}&userType=${user.userType}`;
+            });
+            dropdownMenu.appendChild(dealItem);
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки сделок:', error);
+        dropdownMenu.innerHTML = '<div class="dropdown-empty">Ошибка загрузки</div>';
+    }
+    }
+
+    // ========== ЗВЁЗДЫ РЕЙТИНГА ==========
+    function initRatingStars() {
+    const stars = document.querySelectorAll('#reviews-stars .star');
+    const avgSpan = document.getElementById('average-rating');
+
+    // Только загружаем рейтинг, без возможности клика
+    async function loadCurrentRating() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || !user.id) return;
+        try {
+            const response = await apiFetch(`/api/contractors/${user.id}`);
+            if (response.ok) {
+                const contractor = await response.json();
+                const currentRating = contractor.rating || 0;
+                // Обновляем звёзды (только отображение)
+                stars.forEach((star, index) => {
+                    if (index < Math.round(currentRating)) {
+                        star.classList.add('active');
+                        star.textContent = '★';
+                    } else {
+                        star.classList.remove('active');
+                        star.textContent = '☆';
+                    }
+                });
+                if (avgSpan) avgSpan.textContent = currentRating.toFixed(1);
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки рейтинга:', error);
+        }
+    }
+    loadCurrentRating();
+}
+
+    if (document.getElementById('reviews-stars')) {
+        initRatingStars();
+    }
+
+    // ========== УВЕДОМЛЕНИЯ ==========
+    const notifBtn = document.getElementById('notificationsBtn');
+    if (notifBtn) {
+        notifBtn.addEventListener('click', () => {
+            alert('Уведомления (раздел в разработке)');
+        });
+    }
+
+
+    // ========== ЗАГРУЗКА ПРОФИЛЯ ПО УМОЛЧАНИЮ ==========
+    loadTab('profile');
+    if (user.userType === 'contractor') {
+        updateRequestsBadge();
+    }
+
+    // Слушатель на чекбокс "Показывать завершённые"
+    const showCompletedCheckbox = document.getElementById('showCompletedCheckbox');
+    if (showCompletedCheckbox) {
+        showCompletedCheckbox.addEventListener('change', () => {
+            // Сбрасываем флаг загрузки, чтобы при открытии меню загрузилось заново
+            if (dropdown) {
+                dropdown.removeAttribute('data-loaded');
+            }
+            // Если меню сейчас открыто — обновляем сразу
+            if (dropdown && dropdown.classList.contains('open')) {
+                loadActiveDeals();
+            }
+        });
+    }
+
+    // Открытие модального окна с отзывами контрагента (заказчика или подрядчика)
+// Открытие модального окна с отзывами контрагента (заказчика или подрядчика)
+// Открытие модального окна с отзывами контрагента (заказчика или подрядчика)
+// Открытие модального окна с отзывами контрагента (заказчика или подрядчика)
+async function openContractorReviewsModal(userId, userType, userName) {
+    let modal = document.getElementById('contractorReviewsModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'contractorReviewsModal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-container reviews-list-modal">
+                <h3 class="modal-title">Отзывы о <span id="contractorReviewsName"></span></h3>
+                <div id="contractorReviewsContent" class="reviews-list-container">Загрузка...</div>
+                <button id="closeContractorReviewsBtn" class="btn btn-secondary">Закрыть</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+        document.getElementById('closeContractorReviewsBtn')?.addEventListener('click', () => { modal.style.display = 'none'; });
+    }
+
+    document.getElementById('contractorReviewsName').textContent = userName || 'пользователя';
+    modal.style.display = 'flex';
+    const content = document.getElementById('contractorReviewsContent');
+    content.innerHTML = '<div class="loading">Загрузка отзывов...</div>';
+
+    try {
+        const response = await apiFetch(`/api/reviews/user/${userId}?userType=${userType}`);
+        const reviews = await response.json();
+
+        if (reviews.length === 0) {
+            content.innerHTML = '<div class="empty-state">Пока нет отзывов</div>';
+            return;
+        }
+
+        // Загружаем имена АВТОРОВ отзывов
+        const reviewsWithNames = [];
+        for (const review of reviews) {
+            let authorName = 'Пользователь';
+
+            try {
+                if (review.receiverType === 'customer') {
+                    // Отзыв о заказчике → автор — подрядчик
+                    const res = await apiFetch(`/api/contractors/${review.contractorId}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        authorName = data.companyName || `${data.firstName} ${data.lastName}`;
+                    }
+                } else if (review.receiverType === 'contractor') {
+                    // Отзыв о подрядчике → автор — заказчик
+                    const res = await apiFetch(`/api/customers/${review.customerId}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        authorName = `${data.name} ${data.surname}`;
+                    }
+                }
+            } catch(e) {
+                console.error('Ошибка загрузки автора отзыва:', e);
+            }
+
+            reviewsWithNames.push({ ...review, authorName });
+        }
+
+        content.innerHTML = reviewsWithNames.map(review => `
+            <div class="review-item">
+                <div class="review-item-header">
+                    <span class="review-item-author">${escapeHtml(review.authorName)}</span>
+                    <span class="review-item-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+                </div>
+                <div class="review-item-title">${escapeHtml(review.title)}</div>
+                <div class="review-item-comment">${escapeHtml(review.comment)}</div>
+                <div class="review-item-date">${new Date(review.createdAt).toLocaleDateString('ru-RU')}</div>
+            </div>
+        `).join('');
+
+    } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+        content.innerHTML = '<div class="empty-state">Ошибка загрузки отзывов</div>';
+    }
+}
+
+    // ========== БЛОКИРОВКА КНОПКИ "СОЗДАТЬ ЗАПРОС" ДЛЯ ПОДРЯДЧИКА ==========
+(function blockCreateRequestForContractor() {
+    // Ждём полной загрузки DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    function init() {
+        const createBtn = document.querySelector('.actions-bar .btn-primary');
+        if (!createBtn) {
+            // Если кнопка ещё не появилась, пробуем через MutationObserver
+            observeForButton();
+            return;
+        }
+        attachHandler(createBtn);
+    }
+
+    function observeForButton() {
+        const observer = new MutationObserver(() => {
+            const btn = document.querySelector('.actions-bar .btn-primary');
+            if (btn) {
+                attachHandler(btn);
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Таймаут на всякий случай
+        setTimeout(() => observer.disconnect(), 5000);
+    }
+
+    function attachHandler(btn) {
+        // Удаляем старые обработчики, если были
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        newBtn.addEventListener('click', (e) => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.userType === 'contractor') {
+                e.preventDefault();
+                e.stopPropagation();
+                alert('Уважаемый подрядчик, создайте профиль заказчика, чтобы оставлять заявки :)');
+                return false;
+            }
+            // Если пользователь НЕ подрядчик, пусть переходит по ссылке
+            window.location.href = newBtn.getAttribute('href');
+        });
+    }
+})();
+
+</script>
+
+</body>
+</html>

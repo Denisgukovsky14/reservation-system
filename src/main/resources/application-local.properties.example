@@ -1,0 +1,5 @@
+# Образец. Скопируй этот файл в application-local.properties (без .example)
+# и впиши настоящие значения. Настоящий файл в git не попадает.
+spring.datasource.password=ПАРОЛЬ_ОТ_БАЗЫ
+# base64-строка минимум на 256 бит, например: openssl rand -base64 32
+jwt.secret=СЮДА_СЕКРЕТ_ДЛЯ_JWT

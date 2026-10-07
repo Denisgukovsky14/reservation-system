@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>(function(){function a(){if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}a();window.addEventListener('pageshow',function(e){if(e.persisted)a();});})();</script>
+    <link href="/src/styles/main.css" rel="stylesheet" type="text/css">
+    <title>DesignHub — Экосистема для профи дизайна</title>
+</head>
+<body>
+
+<!-- Динамический хедер -->
+<div id="header-placeholder"></div>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>
+                Единая среда для тех,<br><span class="hero-accent">кто создает пространство</span>
+            </h1>
+            <p>
+                B2B-платформа, объединяющая дизайнеров, заказчиков и подрядчиков в цифровую экосистему с
+                инструментами 3D-визуализации и управления проектами.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <!--
+                <a href="#" class="btn btn-blue" style="padding: 16px 40px;">Создать проект</a>
+
+                <a href="/src/pages/catalog/catalog.html" class="btn btn-dark" style="padding: 16px 40px;">Найти подрядчика</a>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" id="about">
+        <div class="container grid-2">
+            <div>
+                <h2 style="font-size: 2.2rem; margin-bottom: 20px;">О проекте DesignHub</h2>
+                <p style="color: var(--text-dim); margin-bottom: 24px;">
+                    Мы создали не просто биржу, а полноценный
+                    рабочий стол для профессионалов. Здесь идеи превращаются в чертежи, а чертежи — в реальные
+                    объекты благодаря автоматизации коммуникаций и прозрачности сделок.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-card"><span>1.2k+</span><label>Дизайнеров</label></div>
+                    <div class="stat-card"><span>450+</span><label>Подрядчиков</label></div>
+                </div>
+            </div>
+            <div style="background: var(--bg-card); padding: 40px; border-radius: 30px; border: 1px solid var(--border);">
+                <h3 style="margin-bottom: 20px;">Наши принципы:</h3>
+                <ul style="list-style: none; color: var(--text-dim);">
+                    <li style="margin-bottom: 15px;"><b>Безопасность: </b>Все платежи защищены escrow-системой.</li>
+                    <li style="margin-bottom: 15px;"><b>Скорость: </b>Мгновенные уведомления о тендерах.</li>
+                    <li style="margin-bottom: 15px;"><b>Качество: </b>Верифицированные портфолио и отзывы.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section>
+            <h2>Как это работает</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h3>1. Создайте проект</h3>
+                    <p>Опишите вашу идею, добавьте детали и требования для будущих исполнителей.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h3>2. Найдите команду</h3>
+                    <p>Подберите идеальных исполнителей и надежных подрядчиков под ваш бюджет.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h3>3. Реализуйте идеи</h3>
+                    <p>Используйте встроенные инструменты для контроля сроков и качества работ.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Инструменты вашего роста</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="f-icon"></span>
+                    <h3>Рабочий стол</h3>
+                    <p>Управление задачами, графики платежей и хранилище документов в одном окне.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon"></span>
+                    <h3>2D в 3D AI</h3>
+                    <p>Конвертируйте планировки в объемные модели за считанные секунды (Premium).</p>
+                </div>
+                <div class="feature-card">
+                    <span class="f-icon"></span>
+                    <h3>Тендеры</h3>
+                    <p>Размещайте заказы и получайте предложения только от подходящих профи.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="benefits">
+            <h2>Преимущества для вашей роли</h2>
+            <div class="tabs">
+                <div class="tab active" data-role="designers">Дизайнерам</div>
+                <div class="tab" data-role="customers">Заказчикам</div>
+                <div class="tab" data-role="contractors">Подрядчикам</div>
+            </div>
+
+            <div id="designers" class="grid-3 tab-content active">
+                <div class="card"><h3>Управление</h3><p>Все проекты и правки в одном удобном интерфейсе.</p></div>
+                <div class="card"><h3>Новые клиенты</h3><p>Автоматический поток заказов через ваше портфолио.</p></div>
+                <div class="card"><h3>Безопасность</h3><p>Гарантия оплаты каждого этапа вашей работы.</p></div>
+            </div>
+
+            <div id="customers" class="grid-3 tab-content">
+                <div class="card"><h3>Выбор профи</h3><p>Сотни проверенных специалистов с реальными отзывами.</p></div>
+                <div class="card"><h3>Прозрачность</h3><p>Следите за прогрессом проекта прямо в браузере.</p></div>
+                <div class="card"><h3>Экономия</h3><p>Прямой контакт с подрядчиками без лишних посредников.</p></div>
+            </div>
+
+            <div id="contractors" class="grid-3 tab-content">
+                <div class="card"><h3>Больше заказов</h3><p>Получайте приглашения в крупные дизайн-проекты.</p></div>
+                <div class="card"><h3>Коллаборация</h3><p>Работайте в связке с лучшими дизайнерами города.</p></div>
+                <div class="card"><h3>Планирование</h3><p>Удобный календарь загрузки вашей бригады.</p></div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<!-- Скрипты -->
+<script src="/src/scripts/utils/renderHeader.js"></script>
+<script src="/src/scripts/utils/loadComponents.js"></script>
+<script src="/src/scripts/pages/home.js"></script>
+</body>
+</html>

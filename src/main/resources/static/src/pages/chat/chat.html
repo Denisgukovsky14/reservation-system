@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>(function(){function a(){if(localStorage.getItem('theme')==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}a();window.addEventListener('pageshow',function(e){if(e.persisted)a();});})();</script>
+    <link href="/src/styles/main.css" rel="stylesheet" type="text/css">
+    <link href="/src/styles/pages/chat.css" rel="stylesheet" type="text/css">
+    <title>DesignHub &mdash; Сообщения</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon"></div> DesignHub
+            </div>
+            <nav>
+                <a href="#">Главная</a>
+                <a href="#">Проекты</a>
+                <a href="#">Команда</a>
+                <a href="#" style="color: white;">Сообщения</a>
+                <a href="#">Уведомления</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="user-nav">
+                <span></span>
+                <img src="https://i.pravatar.cc/100?img=26" class="avatar-small" alt="User">
+            </div>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <aside class="contacts-sidebar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Поиск">
+            </div>
+            <div class="contacts-list">
+                <div class="contact-item active">
+                    <div class="contact-avatar">
+                        <img src="https://i.pravatar.cc/100?img=26" class="avatar-small"
+                            style="width:44px; height:44px;" alt="Elena">
+                        <div class="status-dot"></div>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Елена Смирнова</h4>
+                        <p>Дизайн интерьера</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <img src="https://i.pravatar.cc/100?img=11" class="avatar-small" style="width:44px; height:44px;"
+                        alt="Ivan">
+                    <div class="contact-info">
+                        <h4>Иван Петров</h4>
+                        <p>Дизайн экстерьера</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <img src="https://i.pravatar.cc/100?img=5" class="avatar-small" style="width:44px; height:44px;"
+                        alt="Olga">
+                    <div class="contact-info">
+                        <h4>Ольга Кузнецова</h4>
+                        <p>Дизайн интерьера</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <div class="chat-header">
+                <h2>Елена Смирнова</h2>
+                <p>Дизайн интерьера</p>
+            </div>
+
+            <div class="messages-area">
+                <div class="message received">
+                    <span class="sender-name">Елена Смирнова</span>
+                    <div class="bubble">Привет, как продвигается работа над проектом?</div>
+                </div>
+
+                <div class="message sent">
+                    <span class="sender-name">Вы</span>
+                    <div class="bubble">Привет, Елена! Все идет по плану, скоро будет готов первый вариант.</div>
+                </div>
+
+                <div class="message received">
+                    <span class="sender-name">Елена Смирнова</span>
+                    <div class="bubble">Отлично, жду с нетерпением!</div>
+                </div>
+
+                <div class="message sent">
+                    <span class="sender-name">Вы</span>
+                    <div class="bubble">Могу отправить тебе несколько предварительных эскизов, чтобы ты могла оценить
+                        направление.</div>
+                </div>
+
+                <div class="message sent">
+                    <span class="sender-name">Вы</span>
+                    <div class="bubble">Вот, посмотри, пожалуйста:</div>
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600" class="message-img"
+                        alt="Sketch">
+                </div>
+            </div>
+
+            <div class="input-area">
+                <span class="icon-btn"></span>
+                <span class="icon-btn"></span>
+                <input type="text" class="chat-input" placeholder="Написать сообщение">
+                <button class="send-btn">Отправить</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="/src/scripts/pages/chat.js"></script>
+    <script src="/src/scripts/utils/loadComponents.js"></script>
+</body>
+</html>
