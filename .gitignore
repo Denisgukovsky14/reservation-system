@@ -35,6 +35,3 @@ build/
 ### DesignHub: приватное, в репозиторий не попадает ###
 src/main/resources/application-local.properties
 DBDUMP/
-.claude/
-.agents/
-skills-lock.json
